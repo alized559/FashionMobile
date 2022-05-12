@@ -8,4 +8,9 @@ public class ServerUrls {
     public static String getUserLikes() {
         return WebsiteUrl + "getLikes.php?userID=" + UserLogin.CurrentLoginID;
     }
+
+    public static String getUserImage(int id) {
+        return WebsiteUrl + "getUserImage.php?id=" + id;
+    }
+
 }
