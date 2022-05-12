@@ -1,4 +1,4 @@
-package com.example.fashionmobile;
+package com.fashion.fashionmobile;
 
 import org.junit.Test;
 
