@@ -8,61 +8,91 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50px"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="40px">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="40px">
 
-            <androidx.cardview.widget.CardView
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="15dp">
+
+                    <ImageView
+                        android:id="@+id/home_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="480dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user_default_image"/>
+
+                    <TextView
+                        android:id="@+id/home_text"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Your Fashion Movement"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:lineHeight="30dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="110dp"
+                        android:layout_gravity="bottom|center_horizontal"/>
+
+                    <Button
+                        android:id="@+id/shop_now"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="50dp"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@color/white"
+                        android:text="Shop Now"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:layout_gravity="bottom|center_horizontal"/>
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="15dp">
+                android:text="Popular Right Now"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"/>
 
-                <ImageView
-                    android:id="@+id/home_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="480dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/user_default_image"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                app:justifyContent="space_between"
+                app:flexWrap="wrap">
 
-                <TextView
-                    android:id="@+id/home_text"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Your Fashion Movement"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:lineHeight="30dp"
-                    android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
-                    android:layout_marginBottom="110dp"
-                    android:layout_gravity="bottom|center_horizontal"/>
+            </com.google.android.flexbox.FlexboxLayout>
 
-                <Button
-                    android:id="@+id/shop_now"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="50dp"
-                    android:textAllCaps="false"
-                    android:backgroundTint="@color/white"
-                    android:text="Shop Now"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:layout_gravity="bottom|center_horizontal"/>
-            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
-        </FrameLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </RelativeLayout>

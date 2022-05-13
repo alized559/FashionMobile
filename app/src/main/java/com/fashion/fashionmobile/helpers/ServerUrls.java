@@ -20,4 +20,10 @@ public class ServerUrls {
 
     public static String changeProfileFullname = WebsiteUrl + "changeProfileFullname.php";
 
+    public static String getPopularProducts = WebsiteUrl + "getPopularProducts.php";
+
+    public static String getProductImage(int id) {
+        return WebsiteUrl + "getProductImage.php?id=" + id;
+    }
+
 }
