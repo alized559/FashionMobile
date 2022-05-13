@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
 import com.fashion.fashionmobile.databinding.FragmentUserPanelBinding;
 import com.fashion.fashionmobile.databinding.FragmentUserPanelLoginBinding;
@@ -149,6 +150,10 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
 
+                                    MainActivity.CartFab.setVisibility(View.VISIBLE);
+                                    MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
+                                    MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
+
                                     //Move To Panel
 
                                     FragmentTransaction ft = getParentFragmentManager().beginTransaction();
@@ -235,6 +240,10 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateLoginState(true, id, username, email, fullname, type);
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
+
+                                    MainActivity.CartFab.setVisibility(View.VISIBLE);
+                                    MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
+                                    MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
                                     //Move To Panel
 

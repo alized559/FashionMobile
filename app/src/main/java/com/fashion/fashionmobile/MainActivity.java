@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.fashion.fashionmobile.helpers.UserLogin;
 import com.fashion.fashionmobile.ui.home.HomeFragment;
 import com.fashion.fashionmobile.ui.userpanel.UserPanelFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static NavController navController = null;
 
+    public static FloatingActionButton CartFab = null;
+    public static ImageView UserLikesImage = null, UserLogoutImage = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+        CartFab = binding.appBarMain.cartFab;
+        binding.appBarMain.cartFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "This is going to be the cart", Snackbar.LENGTH_LONG)
@@ -61,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_products, R.id.nav_cart)
+                R.id.nav_home, R.id.nav_products, R.id.nav_cart, R.id.nav_userpanel)
                 .setOpenableLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -78,13 +83,39 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.profileCard.setVisibility(View.INVISIBLE);
 
+        UserLikesImage = binding.appBarMain.mainToolbarLikes;
+        UserLogoutImage = binding.appBarMain.mainToolbarLogout;
+
+        CartFab.setVisibility(View.GONE);
+        UserLikesImage.setVisibility(View.GONE);
+        UserLogoutImage.setVisibility(View.GONE);
+
+        UserLikesImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "This is going to be the user likes", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        UserLogoutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserLogin.Logout();
+                navController.navigateUp();
+            }
+        });
+
         UserLogin.AttemptAutoLogin(this);
+
+        getSupportActionBar().setTitle("");
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        /*getMenuInflater().inflate(R.menu.main, menu);
         MenuItem item = menu.findItem(R.id.action_logout);
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -94,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(getIntent());
                 return true;
             }
-        });
+        });*/
 
         return true;
     }

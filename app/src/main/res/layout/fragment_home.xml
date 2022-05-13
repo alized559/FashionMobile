@@ -51,6 +51,7 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="50dp"
+                    android:textAllCaps="false"
                     android:backgroundTint="@color/white"
                     android:text="Shop Now"
                     android:paddingTop="10dp"

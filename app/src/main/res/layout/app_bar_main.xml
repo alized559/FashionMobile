@@ -16,19 +16,46 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/ToolBarStyle"
-            app:popupTheme="@style/Theme.FashionMobile.PopupOverlay" />
+            app:popupTheme="@style/Theme.FashionMobile.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/main_toolbar_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/user_logout_image"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/main_toolbar_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/user_likes_image"
+                android:layout_gravity="right"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/main_toolbar_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"/>
+
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/cartFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/user_cart_image" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

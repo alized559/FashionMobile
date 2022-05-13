@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -52,10 +53,14 @@ public class UserPanelFragment extends Fragment {
             TextView usernameText = root.findViewById(R.id.user_username_text);
             TextView emailText = root.findViewById(R.id.user_email_text);
 
+            CardView userImageCardView = root.findViewById(R.id.user_image_card_view);
+
             MainActivity.profileName.setText(UserLogin.CurrentLoginFullName);
             MainActivity.profileEmail.setText(UserLogin.CurrentLoginEmail);
             MainActivity.profileImage.setImageDrawable(null);
             MainActivity.profileCard.setVisibility(View.INVISIBLE);
+
+            userImageCardView.setVisibility(View.GONE);
 
             ImageView profileImage = root.findViewById(R.id.user_profile_picture);
 
@@ -74,6 +79,7 @@ public class UserPanelFragment extends Fragment {
                         profileImage.setImageBitmap(response);
                         MainActivity.profileImage.setImageBitmap(response);
                         MainActivity.profileCard.setVisibility(View.VISIBLE);
+                        userImageCardView.setVisibility(View.VISIBLE);
                     }
                 }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
                         new Response.ErrorListener() {
@@ -89,6 +95,7 @@ public class UserPanelFragment extends Fragment {
                 profileImage.setImageBitmap(userimage);
                 MainActivity.profileImage.setImageBitmap(userimage);
                 MainActivity.profileCard.setVisibility(View.VISIBLE);
+                userImageCardView.setVisibility(View.VISIBLE);
             }
 
             return root;

@@ -21,7 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            card_view:cardCornerRadius="64dp">
+            card_view:cardCornerRadius="64dp"
+            android:id="@+id/user_image_card_view">
 
             <ImageView
                 android:id="@+id/user_profile_picture"
