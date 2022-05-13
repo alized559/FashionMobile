@@ -35,12 +35,7 @@ public class HomeFragment extends Fragment {
 
         Button shopNow = root.findViewById(R.id.shop_now);
         shopNow.setOnClickListener(view -> {
-            /*FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-            ft.setReorderingAllowed(true);
-            ft.replace(R.id.nav_host_fragment_content_main, ProductsFragment.class, null);
-            ft.addToBackStack(ProductsFragment.class.getName());
-            ft.commit();*/
-            MainActivity.navController.navigate(R.id.action_home_to_products);
+            Navigation.findNavController(view).navigate(R.id.action_home_to_products);
         });
 
         return root;

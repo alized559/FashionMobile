@@ -13,10 +13,9 @@
 
         <action
             android:id="@+id/action_home_to_products"
-            app:destination="@id/nav_products" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_cart"
-            app:destination="@id/nav_cart" />
+            app:destination="@id/nav_products"
+            app:popUpTo="@+id/nav_home"
+            app:popUpToInclusive="true"/>
 
     </fragment>
 
@@ -25,9 +24,6 @@
         android:name="com.fashion.fashionmobile.ui.products.ProductsFragment"
         android:label="@string/menu_products"
         tools:layout="@layout/fragment_products" >
-        <action
-            android:id="@+id/action_nav_products_to_nav_cart"
-            app:destination="@id/nav_cart" />
     </fragment>
 
     <fragment
@@ -41,8 +37,5 @@
         android:name="com.fashion.fashionmobile.ui.userpanel.UserPanelFragment"
         android:label="@string/menu_panel"
         tools:layout="@layout/fragment_user_panel" >
-        <action
-            android:id="@+id/action_nav_userpanel_to_nav_cart"
-            app:destination="@id/nav_cart" />
     </fragment>
 </navigation>
