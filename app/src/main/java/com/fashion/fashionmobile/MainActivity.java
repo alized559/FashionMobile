@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     public static TextView profileName = null, profileEmail = null;
     public static CardView profileCard = null;
 
+    public static NavController navController = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_products, R.id.nav_cart)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //navController.
 
         View header = navigationView.getHeaderView(0);
         profileImage = header.findViewById(R.id.user_profile_picture_navbar);

@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 
+import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.fashion.fashionmobile.databinding.FragmentHomeBinding;
 import com.fashion.fashionmobile.ui.products.ProductsFragment;
@@ -32,11 +35,12 @@ public class HomeFragment extends Fragment {
 
         Button shopNow = root.findViewById(R.id.shop_now);
         shopNow.setOnClickListener(view -> {
-            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+            /*FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             ft.setReorderingAllowed(true);
             ft.replace(R.id.nav_host_fragment_content_main, ProductsFragment.class, null);
             ft.addToBackStack(ProductsFragment.class.getName());
-            ft.commit();
+            ft.commit();*/
+            MainActivity.navController.navigate(R.id.action_home_to_products);
         });
 
         return root;
