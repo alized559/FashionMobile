@@ -1,40 +1,44 @@
 package com.fashion.fashionmobile.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TableLayout;
 
 import com.fashion.fashionmobile.R;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.fashion.fashionmobile.databinding.FragmentHomeBinding;
+import com.fashion.fashionmobile.ui.products.ProductsFragment;
+import com.fashion.fashionmobile.ui.userpanel.UserPanelFragment;
+import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
+        Button shopNow = root.findViewById(R.id.shop_now);
+        shopNow.setOnClickListener(view -> {
+            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+            ft.setReorderingAllowed(true);
+            ft.replace(R.id.nav_host_fragment_content_main, ProductsFragment.class, null);
+            ft.addToBackStack(ProductsFragment.class.getName());
+            ft.commit();
         });
+
         return root;
     }
 
