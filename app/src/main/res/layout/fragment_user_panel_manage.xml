@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.userpanel.UserPanelManageFragment"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_user_manage_scrollview">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="24dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Edit Your Profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:text="Change Your Fullname" />
+
+                <EditText
+                    android:id="@+id/fullnameInputText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="#f9f9f9"
+                    android:ems="10"
+                    android:hint="Full Name"
+                    android:inputType="textPersonName"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/userChangeFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/blue"
+                    android:text="Update Full Name"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/vertical_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:text="Change Your Password" />
+
+                <EditText
+                    android:id="@+id/currentPasswordInputText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="#f9f9f9"
+                    android:ems="10"
+                    android:hint="Current Password"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/newPasswordInputText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="#f9f9f9"
+                    android:ems="10"
+                    android:hint="New Password"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/repeatNewPasswordInputText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="#f9f9f9"
+                    android:ems="10"
+                    android:hint="Repeat New Password"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/userChangePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/blue"
+                    android:text="Change Password"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/vertical_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:text="Profile Picture" />
+
+                <ImageView
+                    android:id="@+id/userOldProfilePicture"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"/>
+                <Button
+                    android:id="@+id/userChangeProfileImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/blue"
+                    android:text="Choose Image And Upload"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/vertical_line" />
+
+                <Button
+                    android:id="@+id/userCancelManage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/blue"
+                    android:text="Back"
+                    android:layout_gravity="right"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

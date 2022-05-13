@@ -10,5 +10,6 @@
     <color name="tomato">#ff6347</color>
     <color name="red">#FF0000</color>
     <color name="blue">#007BFF</color>
+    <color name="vertical_line">#E5E5E5</color>
     <color name="whitesmoke">#F5F5F5</color>
 </resources>

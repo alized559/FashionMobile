@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.databinding.FragmentCartBinding;
 
 public class CartFragment extends Fragment {
@@ -26,6 +27,8 @@ public class CartFragment extends Fragment {
 
         binding = FragmentCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        MainActivity.CartFab.setVisibility(View.GONE);
 
         final TextView textView = binding.textSlideshow;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

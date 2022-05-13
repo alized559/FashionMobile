@@ -13,4 +13,11 @@ public class ServerUrls {
         return WebsiteUrl + "getUserImage.php?id=" + id;
     }
 
+
+    public static String changeProfileImage = WebsiteUrl + "changeProfileImage.php";
+
+    public static String changeProfilePassword = WebsiteUrl + "changeProfilePassword.php";
+
+    public static String changeProfileFullname = WebsiteUrl + "changeProfileFullname.php";
+
 }

@@ -125,6 +125,20 @@
 
             </TableLayout>
 
+            <Button
+                android:id="@+id/user_manage_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:backgroundTint="#EBEBEB"
+                android:text="Manage Profile"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:fontFamily="@font/inter_medium"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -124,7 +124,7 @@ public class UserLogin {
                     }
 
                 }catch(Exception e){
-                    Log.e("Fatal Error", e.getMessage());
+                    Log.e("Fatal Error", e.getMessage() + "");
                     UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                     UserLikes.ResetLikes();
                     MainActivity.profileImage.setImageDrawable(null);
@@ -136,7 +136,7 @@ public class UserLogin {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Fatal Error", error.getMessage());
+                Log.e("Fatal Error", error.getMessage() + "");
                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                 UserLikes.ResetLikes();
                 MainActivity.profileImage.setImageDrawable(null);

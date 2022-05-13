@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.databinding.FragmentProductsBinding;
 
 public class ProductsFragment extends Fragment {
@@ -26,6 +27,8 @@ public class ProductsFragment extends Fragment {
 
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        MainActivity.CartFab.setVisibility(View.VISIBLE);
 
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

@@ -173,7 +173,7 @@ public class UserPanelLoginFragment extends Fragment {
                                 }
 
                             }catch(Exception e){
-                                Log.e("Fatal Error", e.getMessage());
+                                Log.e("Fatal Error", e.getMessage() + "");
                                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                                 UserLikes.ResetLikes();
                                 loginButton.setText("Login");
@@ -186,7 +186,7 @@ public class UserPanelLoginFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Fatal Error", error.getMessage());
+                            Log.e("Fatal Error", error.getMessage() + "");
                             UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                             UserLikes.ResetLikes();
                             loginButton.setText("Login");
@@ -265,7 +265,7 @@ public class UserPanelLoginFragment extends Fragment {
                                 }
 
                             }catch(Exception e){
-                                Log.e("Fatal Error", e.getMessage());
+                                Log.e("Fatal Error", e.getMessage() + "");
                                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                                 UserLikes.ResetLikes();
                                 loginButton.setText("Register");
@@ -279,7 +279,7 @@ public class UserPanelLoginFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Fatal Error", error.getMessage());
+                            Log.e("Fatal Error", error.getMessage() + "");
                             UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                             UserLikes.ResetLikes();
                             loginButton.setText("Register");

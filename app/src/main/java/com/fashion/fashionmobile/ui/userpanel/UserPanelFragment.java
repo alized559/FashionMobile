@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +56,8 @@ public class UserPanelFragment extends Fragment {
             TextView emailText = root.findViewById(R.id.user_email_text);
 
             CardView userImageCardView = root.findViewById(R.id.user_image_card_view);
+
+            MainActivity.CartFab.setVisibility(View.VISIBLE);
 
             MainActivity.profileName.setText(UserLogin.CurrentLoginFullName);
             MainActivity.profileEmail.setText(UserLogin.CurrentLoginEmail);
@@ -97,6 +101,16 @@ public class UserPanelFragment extends Fragment {
                 MainActivity.profileCard.setVisibility(View.VISIBLE);
                 userImageCardView.setVisibility(View.VISIBLE);
             }
+
+            Button manageProfile = root.findViewById(R.id.user_manage_profile);
+
+            manageProfile.setOnClickListener(view -> {
+                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                ft.setReorderingAllowed(true);
+                ft.replace(R.id.nav_host_fragment_content_main, UserPanelManageFragment.class, null);
+                ft.addToBackStack(UserPanelManageFragment.class.getName());
+                ft.commit();
+            });
 
             return root;
         }
