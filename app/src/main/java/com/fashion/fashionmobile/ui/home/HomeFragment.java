@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ import androidx.navigation.Navigation;
 import com.fashion.fashionmobile.databinding.FragmentHomeBinding;
 import com.fashion.fashionmobile.helpers.ImageCache;
 import com.fashion.fashionmobile.helpers.ServerUrls;
+import com.fashion.fashionmobile.helpers.UserLogin;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -73,7 +75,9 @@ public class HomeFragment extends Fragment {
     }
 
     public void getPopularProducts(View root) {
-        JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getPopularProducts, new Response.Listener<JSONArray>() {
+
+        flex.removeAllViews();
+        JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getPopularProducts + "?currency=" + UserLogin.CurrentCurrency, new Response.Listener<JSONArray>() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onResponse(JSONArray response) {
@@ -128,19 +132,29 @@ public class HomeFragment extends Fragment {
                                     LinearLayout.LayoutParams linearlp1 = new LinearLayout.LayoutParams(
                                             (int) (155 * root.getContext().getResources().getDisplayMetrics().density + 0.5f),
                                             ViewGroup.LayoutParams.WRAP_CONTENT);
-                                    linear1.setOrientation(LinearLayout.HORIZONTAL);
+                                    if(UserLogin.CurrentCurrency != "US, USD"){
+                                        linear1.setOrientation(LinearLayout.VERTICAL);
+                                    }else {
+                                        linear1.setOrientation(LinearLayout.HORIZONTAL);
+                                    }
+
                                     linear1.setLayoutParams(linearlp1);
 
                                     if (discount != 0) {
                                         LinearLayout.LayoutParams textlp = new LinearLayout.LayoutParams(
                                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                                 ViewGroup.LayoutParams.WRAP_CONTENT);
+
                                         textlp.setMargins(20, 0, 0, 0);
 
                                         TextView prod_price = new TextView(root.getContext());
                                         prod_price.setLayoutParams(textlp);
                                         String p = String.valueOf(price);
-                                        prod_price.setText("$" + p);
+                                        if(UserLogin.CurrentCurrency != "US, USD"){
+                                            prod_price.setText("LBP " + String.format("%,d", (int) Double.parseDouble(p)));
+                                        }else {
+                                            prod_price.setText("$" + p);
+                                        }
                                         prod_price.setTextColor(Color.BLACK);
                                         prod_price.setTextSize(14);
                                         Typeface t1 = getResources().getFont(R.font.inter_bold);
@@ -150,7 +164,11 @@ public class HomeFragment extends Fragment {
                                         TextView discount_price = new TextView(root.getContext());
                                         discount_price.setLayoutParams(textlp);
                                         double newPrice = price - discount;
-                                        discount_price.setText("$" + df.format(newPrice));
+                                        if(UserLogin.CurrentCurrency != "US, USD"){
+                                            discount_price.setText("LBP " + String.format("%,d", (int) newPrice));
+                                        }else {
+                                            discount_price.setText("$" + df.format(newPrice));
+                                        }
                                         discount_price.setTextColor(Color.parseColor("#ffd814"));
                                         discount_price.setTextSize(14);
                                         Typeface t2 = getResources().getFont(R.font.inter_bold);
@@ -162,7 +180,11 @@ public class HomeFragment extends Fragment {
                                         TextView prod_price = new TextView(root.getContext());
                                         prod_price.setLayoutParams(textLayout);
                                         String p = String.valueOf(price);
-                                        prod_price.setText("$" + p);
+                                        if(UserLogin.CurrentCurrency != "US, USD"){
+                                            prod_price.setText("LBP " + String.format("%,d", (int) Double.parseDouble(p)));
+                                        }else {
+                                            prod_price.setText("$" + p);
+                                        }
                                         prod_price.setTextColor(Color.BLACK);
                                         prod_price.setTextSize(14);
                                         Typeface t2 = getResources().getFont(R.font.inter_bold);
@@ -224,7 +246,11 @@ public class HomeFragment extends Fragment {
                             LinearLayout.LayoutParams linearlp1 = new LinearLayout.LayoutParams(
                                     (int) (155 * root.getContext().getResources().getDisplayMetrics().density + 0.5f),
                                     ViewGroup.LayoutParams.WRAP_CONTENT);
-                            linear1.setOrientation(LinearLayout.HORIZONTAL);
+                            if(UserLogin.CurrentCurrency != "US, USD"){
+                                linear1.setOrientation(LinearLayout.VERTICAL);
+                            }else {
+                                linear1.setOrientation(LinearLayout.HORIZONTAL);
+                            }
                             linear1.setLayoutParams(linearlp1);
 
                             if (discount != 0) {
@@ -236,7 +262,11 @@ public class HomeFragment extends Fragment {
                                 TextView prod_price = new TextView(root.getContext());
                                 prod_price.setLayoutParams(textlp);
                                 String p = String.valueOf(price);
-                                prod_price.setText("$" + p);
+                                if(UserLogin.CurrentCurrency != "US, USD"){
+                                    prod_price.setText("LBP " + String.format("%,d", (int) Double.parseDouble(p)));
+                                }else {
+                                    prod_price.setText("$" + p);
+                                }
                                 prod_price.setTextColor(Color.BLACK);
                                 prod_price.setTextSize(14);
                                 Typeface t1 = getResources().getFont(R.font.inter_bold);
@@ -246,7 +276,11 @@ public class HomeFragment extends Fragment {
                                 TextView discount_price = new TextView(root.getContext());
                                 discount_price.setLayoutParams(textlp);
                                 double newPrice = price - discount;
-                                discount_price.setText("$" + df.format(newPrice));
+                                if(UserLogin.CurrentCurrency != "US, USD"){
+                                    discount_price.setText("LBP " + String.format("%,d", (int) newPrice));
+                                }else {
+                                    discount_price.setText("$" + df.format(newPrice));
+                                }
                                 discount_price.setTextColor(Color.parseColor("#ffd814"));
                                 discount_price.setTextSize(14);
                                 Typeface t2 = getResources().getFont(R.font.inter_bold);
@@ -258,7 +292,11 @@ public class HomeFragment extends Fragment {
                                 TextView prod_price = new TextView(root.getContext());
                                 prod_price.setLayoutParams(textLayout);
                                 String p = String.valueOf(price);
-                                prod_price.setText("$" + p);
+                                if(UserLogin.CurrentCurrency != "US, USD"){
+                                    prod_price.setText("LBP " + String.format("%,d", (int) Double.parseDouble(p)));
+                                }else {
+                                    prod_price.setText("$" + p);
+                                }
                                 prod_price.setTextColor(Color.BLACK);
                                 prod_price.setTextSize(14);
                                 Typeface t2 = getResources().getFont(R.font.inter_bold);
@@ -273,19 +311,23 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 } catch(Exception e) {
-                    Toast.makeText(root.getContext(), "error", Toast.LENGTH_SHORT).show();
+                    Log.d("UIError", e.getMessage() + "");
+                    //.makeText(root.getContext(), "UI Error Occurred!", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(root.getContext(), "error", Toast.LENGTH_SHORT).show();
+                Log.d("ProductsError", error.getMessage() + "");
+                //Toast.makeText(root.getContext(), "Server Error Occurred!", Toast.LENGTH_SHORT).show();
+                getPopularProducts(root);
             }
         });
         queue.add(request);
     }
 
     public void getNewDrops(View root) {
+        flipper.removeAllViews();
         JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getNewDrops, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -356,13 +398,16 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 } catch(Exception e) {
-                    Toast.makeText(root.getContext(), "error", Toast.LENGTH_SHORT).show();
+                    Log.d("UIError", e.getMessage() + "");
+                    //Toast.makeText(root.getContext(), "UI Error Occurred!", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(root.getContext(), "error", Toast.LENGTH_SHORT).show();
+                Log.d("DropsError", error.getMessage() + "");
+                //Toast.makeText(root.getContext(), "Server Error Occurred!", Toast.LENGTH_SHORT).show();
+                getNewDrops(root);
             }
         });
         queue.add(request);

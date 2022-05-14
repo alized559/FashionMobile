@@ -6,7 +6,15 @@ public class ServerUrls {
     public static String authenticate = WebsiteUrl + "authenticate.php";
 
     public static String getUserLikes() {
-        return WebsiteUrl + "getLikes.php?userID=" + UserLogin.CurrentLoginID;
+        return WebsiteUrl + "getLikes.php?id=" + UserLogin.CurrentLoginID;
+    }
+
+    public static String getPreviousOrders(int limit) {
+        return WebsiteUrl + "getPreviousOrders.php?id=" + UserLogin.CurrentLoginID + "&limit=" + limit;
+    }
+
+    public static String getPostedReviews(int limit) {
+        return WebsiteUrl + "getPostedReviews.php?id=" + UserLogin.CurrentLoginID + "&limit=" + limit;
     }
 
     public static String getUserImage(int id) {

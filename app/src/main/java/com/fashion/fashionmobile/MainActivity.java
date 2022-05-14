@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fashion.fashionmobile.helpers.UserLogin;
@@ -16,7 +19,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,6 +32,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fashion.fashionmobile.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,9 +55,18 @@ public class MainActivity extends AppCompatActivity {
     public static FloatingActionButton CartFab = null;
     public static ImageView UserLikesImage = null, UserLogoutImage = null;
 
+    public static ArrayList<String> CurrencyList = new ArrayList<String>(){
+        {
+            add("US, USD");
+            add("LB, LBP");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        UserLogin.AttemptAutoLogin(this);
 
         CurrentContext = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -72,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        //navController.
 
         View header = navigationView.getHeaderView(0);
         profileImage = header.findViewById(R.id.user_profile_picture_navbar);
@@ -106,9 +125,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        UserLogin.AttemptAutoLogin(this);
-
         getSupportActionBar().setTitle("");
+
+        MenuItem spinnerItem = navigationView.getMenu().findItem(R.id.nav_currency);
+        Spinner spinner = (Spinner) spinnerItem.getActionView();
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        CurrencyList); //selected item will look like a spinner set from XML
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerArrayAdapter);
+
+        spinner.setSelection(CurrencyList.indexOf(UserLogin.CurrentCurrency));
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                UserLogin.UpdateCurrency(CurrencyList.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
 
     }
 

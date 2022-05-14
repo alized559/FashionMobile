@@ -12,4 +12,9 @@
     <color name="blue">#007BFF</color>
     <color name="vertical_line">#E5E5E5</color>
     <color name="whitesmoke">#F5F5F5</color>
+
+    <color name="state_pending">#FFD814</color>
+    <color name="state_delivered">#26b40d</color>
+    <color name="state_returned">#ff1414</color>
+    <color name="state_ontheway">#093ce4</color>
 </resources>

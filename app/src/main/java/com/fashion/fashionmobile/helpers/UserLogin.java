@@ -36,11 +36,16 @@ public class UserLogin {
     public static String CurrentLoginEmail = "No Email Found";
     public static String CurrentLoginFullName = "No Full Name Found";
     public static String CurrentLoginType = "user";
+    public static String CurrentCurrency = "US, USD";
     public static int CurrentLoginID = -1;
 
     public static void AttemptAutoLogin(Context context) {
         if (prefs == null) {
             prefs = context.getSharedPreferences("user_settings", context.MODE_PRIVATE);
+        }
+        String currency = prefs.getString("currency", null);
+        if(currency != null && !currency.isEmpty()){
+            CurrentCurrency = currency;
         }
         if (!isLoggedIn) {
 
@@ -124,7 +129,7 @@ public class UserLogin {
                     }
 
                 }catch(Exception e){
-                    Log.e("Fatal Error", e.getMessage() + "");
+                    Log.e("LoginException", e.getMessage() + "");
                     UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                     UserLikes.ResetLikes();
                     MainActivity.profileImage.setImageDrawable(null);
@@ -136,7 +141,8 @@ public class UserLogin {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Fatal Error", error.getMessage() + "");
+                Log.e("LoginError", error.getMessage() + "");
+                SendLoginRequest(username, password, context);
                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                 UserLikes.ResetLikes();
                 MainActivity.profileImage.setImageDrawable(null);
@@ -172,6 +178,13 @@ public class UserLogin {
         editor.putString("username", username);
         editor.putString("password", password);
 
+        editor.commit();//Apply changes
+    }
+
+    public static void UpdateCurrency(String currency) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("currency", currency);
+        CurrentCurrency = currency;
         editor.commit();//Apply changes
     }
 

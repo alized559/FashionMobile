@@ -173,12 +173,12 @@ public class UserPanelLoginFragment extends Fragment {
                                 }
 
                             }catch(Exception e){
-                                Log.e("Fatal Error", e.getMessage() + "");
+                                Log.e("LoginException", e.getMessage() + "");
                                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                                 UserLikes.ResetLikes();
                                 loginButton.setText("Login");
                                 loginButton.setEnabled(true);
-                                errorMessage.setText("Fatal Error Occured!");
+                                errorMessage.setText("Fatal Exception Occurred!");
                                 errorMessage.setVisibility(View.VISIBLE);
                                 errorMessage.startAnimation(bounceAnim);
                             }
@@ -186,12 +186,12 @@ public class UserPanelLoginFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Fatal Error", error.getMessage() + "");
+                            Log.e("LoginError", error.getMessage() + "");
                             UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                             UserLikes.ResetLikes();
                             loginButton.setText("Login");
                             loginButton.setEnabled(true);
-                            errorMessage.setText("Fatal Error Occured!");
+                            errorMessage.setText("Fatal Error Occurred!");
                             errorMessage.setVisibility(View.VISIBLE);
                             errorMessage.startAnimation(bounceAnim);
                         }
@@ -265,12 +265,12 @@ public class UserPanelLoginFragment extends Fragment {
                                 }
 
                             }catch(Exception e){
-                                Log.e("Fatal Error", e.getMessage() + "");
+                                Log.e("RegisterException", e.getMessage() + "");
                                 UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                                 UserLikes.ResetLikes();
                                 loginButton.setText("Register");
                                 loginButton.setEnabled(true);
-                                errorMessage.setText("Fatal Error Occured!");
+                                errorMessage.setText("Fatal Exception Occurred!");
                                 errorMessage.setVisibility(View.VISIBLE);
                                 errorMessage.startAnimation(bounceAnim);
                                 mainScrollView.fullScroll(ScrollView.FOCUS_UP);
@@ -279,12 +279,12 @@ public class UserPanelLoginFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Fatal Error", error.getMessage() + "");
+                            Log.e("RegisterError", error.getMessage() + "");
                             UserLogin.UpdateLoginState(false, -1, "Anonymous", "No Email Found", "No Full Name Found", "user");
                             UserLikes.ResetLikes();
                             loginButton.setText("Register");
                             loginButton.setEnabled(true);
-                            errorMessage.setText("Fatal Error Occured!");
+                            errorMessage.setText("Fatal Error Occurred!");
                             errorMessage.setVisibility(View.VISIBLE);
                             errorMessage.startAnimation(bounceAnim);
                             mainScrollView.fullScroll(ScrollView.FOCUS_UP);
