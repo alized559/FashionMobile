@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -51,6 +53,8 @@ public class HomeFragment extends Fragment {
     private ViewFlipper flipper;
     private RequestQueue queue;
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    private ArrayList<String> flipperCaptions = new ArrayList<>();
+    private TextView flipperCaption;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,8 +72,24 @@ public class HomeFragment extends Fragment {
         flex = root.findViewById(R.id.flexLayout);
         getPopularProducts(root);
 
+        flipperCaption = root.findViewById(R.id.slideshow_name);
         flipper = root.findViewById(R.id.flipper);
         getNewDrops(root);
+
+        flipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                if (flipper.getChildCount() > 0) {
+                    flipperCaption.setText(flipperCaptions.get(flipper.getDisplayedChild()));
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) { }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
 
         return root;
     }
@@ -335,8 +355,9 @@ public class HomeFragment extends Fragment {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject row = response.getJSONObject(i);
                         int prod_id = row.getInt("prod_id");
-//                        String name = row.getString("name");
+                        String name = row.getString("name");
                         if(ImageCache.GetProductImage(prod_id) == null) {
+                            int finalI = i;
                             ImageRequest request = new ImageRequest(ServerUrls.getNewDropsImage(prod_id), new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap response) {
@@ -357,12 +378,13 @@ public class HomeFragment extends Fragment {
                                     ImageCache.SetNewDropProductImageCache(prod_id, response);
                                     card.addView(img);
                                     flipper.addView(card);
+                                    flipperCaptions.add(name);
+                                    flipperCaption.setText(flipperCaptions.get(0));
                                     if (flipper.getChildCount() == 1) {
                                         flipper.stopFlipping();
                                     } else {
                                         flipper.startFlipping();
                                     }
-
                                 }
                             }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
                                     new Response.ErrorListener() {
@@ -390,6 +412,8 @@ public class HomeFragment extends Fragment {
                             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             card.addView(img);
                             flipper.addView(card);
+                            flipperCaptions.add(name);
+                            flipperCaption.setText(flipperCaptions.get(0));
                             if (flipper.getChildCount() == 1) {
                                 flipper.stopFlipping();
                             } else {
