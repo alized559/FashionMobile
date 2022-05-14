@@ -10,6 +10,8 @@ public class ImageCache {
 
     static HashMap<Integer, Bitmap> productImageCache = new HashMap<>();
 
+    static HashMap<Integer, Bitmap> newDropProductImageCache = new HashMap<>();
+
     public static void SetProfileImage(int id, Bitmap image){
         userProfileCache.put(id, image);
     }
@@ -28,6 +30,17 @@ public class ImageCache {
     public static Bitmap GetProductImage(int id) {
         if (productImageCache.containsKey(id)){
             return productImageCache.get(id);
+        }
+        return null;
+    }
+
+    public static void SetNewDropProductImageCache(int id, Bitmap image){
+        newDropProductImageCache.put(id, image);
+    }
+
+    public static Bitmap GetNewDropProductImageCache(int id) {
+        if (newDropProductImageCache.containsKey(id)){
+            return newDropProductImageCache.get(id);
         }
         return null;
     }

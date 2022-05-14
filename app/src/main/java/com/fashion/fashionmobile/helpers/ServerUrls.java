@@ -22,8 +22,13 @@ public class ServerUrls {
 
     public static String getPopularProducts = WebsiteUrl + "getPopularProducts.php";
 
+    public static String getNewDrops = WebsiteUrl + "getNewDrops.php";
+
     public static String getProductImage(int id) {
         return WebsiteUrl + "getProductImage.php?id=" + id;
     }
 
+    public static String getNewDropsImage(int id) {
+        return WebsiteUrl + "getNewDropsImage.php?id=" + id;
+    }
 }

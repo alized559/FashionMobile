@@ -91,6 +91,29 @@
 
             </com.google.android.flexbox.FlexboxLayout>
 
+            <TextView
+                android:id="@+id/new_drops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Drops"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"/>
+
+            <ViewFlipper
+                android:id="@+id/flipper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:flipInterval="2000"
+                android:autoStart="true"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:outAnimation="@android:anim/slide_out_right"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp">
+
+            </ViewFlipper>
+
         </LinearLayout>
 
     </ScrollView>
