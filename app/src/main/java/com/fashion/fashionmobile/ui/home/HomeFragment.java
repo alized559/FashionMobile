@@ -159,6 +159,11 @@ public class HomeFragment extends Fragment {
                                     ImageCache.SetNewDropProductImageCache(prod_id, response);
                                     card.addView(img);
                                     flipper.addView(card);
+                                    if (flipper.getChildCount() == 1) {
+                                        flipper.stopFlipping();
+                                    } else {
+                                        flipper.startFlipping();
+                                    }
                                 }
                             }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
                                     new Response.ErrorListener() {
@@ -186,6 +191,11 @@ public class HomeFragment extends Fragment {
                             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             card.addView(img);
                             flipper.addView(card);
+                            if (flipper.getChildCount() == 1) {
+                                flipper.stopFlipping();
+                            } else {
+                                flipper.startFlipping();
+                            }
                         }
                     }
                 } catch(Exception e) {
