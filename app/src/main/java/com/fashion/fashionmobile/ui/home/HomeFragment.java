@@ -15,6 +15,8 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -55,12 +57,18 @@ public class HomeFragment extends Fragment {
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private ArrayList<String> flipperCaptions = new ArrayList<>();
     private TextView flipperCaption;
+    private RelativeLayout loading;
+    private ScrollView page;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        page = root.findViewById(R.id.view);
+        page.setVisibility(View.GONE);
+        loading = root.findViewById(R.id.loading);
 
         Button shopNow = root.findViewById(R.id.shop_now);
         shopNow.setOnClickListener(view -> {
@@ -109,6 +117,7 @@ public class HomeFragment extends Fragment {
                         double price = row.getDouble("price");
                         double discount = row.getDouble("discount");
                         if(ImageCache.GetProductImage(prod_id) == null) {
+                            JSONArray r = response;
                             ImageRequest request = new ImageRequest(ServerUrls.getProductImage(prod_id), new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap response) {
@@ -216,6 +225,10 @@ public class HomeFragment extends Fragment {
                                     linear.addView(prod_name);
                                     linear.addView(linear1);
                                     flex.addView(linear);
+                                    if (flex.getChildCount() == r.length()) {
+                                        loading.setVisibility(View.GONE);
+                                        page.setVisibility(View.VISIBLE);
+                                    }
                                 }
                             }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
                                     new Response.ErrorListener() {
@@ -224,9 +237,9 @@ public class HomeFragment extends Fragment {
                                             Toast.makeText(root.getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-
                             queue.add(request);
                         } else {
+                            JSONArray r = response;
                             LinearLayout linear = new LinearLayout(root.getContext());
                             LinearLayout.LayoutParams linearlp = new LinearLayout.LayoutParams(ViewGroup.
                                     LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -328,6 +341,10 @@ public class HomeFragment extends Fragment {
                             linear.addView(prod_name);
                             linear.addView(linear1);
                             flex.addView(linear);
+                            if (flex.getChildCount() == r.length()) {
+                                loading.setVisibility(View.GONE);
+                                page.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 } catch(Exception e) {
@@ -357,7 +374,6 @@ public class HomeFragment extends Fragment {
                         int prod_id = row.getInt("prod_id");
                         String name = row.getString("name");
                         if(ImageCache.GetProductImage(prod_id) == null) {
-                            int finalI = i;
                             ImageRequest request = new ImageRequest(ServerUrls.getNewDropsImage(prod_id), new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap response) {
