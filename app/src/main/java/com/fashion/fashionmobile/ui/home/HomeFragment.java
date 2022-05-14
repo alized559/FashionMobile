@@ -198,11 +198,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(root.getContext(), "error", Toast.LENGTH_SHORT).show();
             }
         });
-        if (flipper.getChildCount() == 1) {
-            flipper.setVisibility(View.INVISIBLE);
-        } else {
-            flipper.setVisibility(View.VISIBLE);
-        }
         queue.add(request);
     }
 
