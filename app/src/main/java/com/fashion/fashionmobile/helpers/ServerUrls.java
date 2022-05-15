@@ -58,4 +58,6 @@ public class ServerUrls {
     public static String getNewDropsImage(int id) {
         return WebsiteUrl + "getNewDropsImage.php?id=" + id;
     }
+
+    public static String getAllProducts = WebsiteUrl + "getProducts.php";
 }
