@@ -39,6 +39,8 @@ public class ServerUrls {
         return WebsiteUrl + "getPostedReviews.php?id=" + prod_id;
     }
 
+    public static String updateReviews = WebsiteUrl + "updateReviews.php";
+
     public static String updateLikes = WebsiteUrl + "updateLikes.php";
 
     public static String changeProfileImage = WebsiteUrl + "changeProfileImage.php";

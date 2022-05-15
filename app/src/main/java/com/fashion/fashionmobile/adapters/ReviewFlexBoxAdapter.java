@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fashion.fashionmobile.R;
@@ -45,9 +46,11 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
         ImageView picture, delete;
         TextView title, subtitle;
         RatingBar rating;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.review_cardview);
             picture = itemView.findViewById(R.id.review_picture);
             title = itemView.findViewById(R.id.review_title);
             subtitle = itemView.findViewById(R.id.review_subtitle);
@@ -62,8 +65,12 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
             rating.setRating((float) model.Ratings);
             if(model.CanDelete){
                 delete.setVisibility(View.VISIBLE);
+                delete.setOnClickListener(model.onDeleteClicked);
             }else {
                 delete.setVisibility(View.GONE);
+            }
+            if(model.CanVisitProduct){
+                cardView.setOnClickListener(model.onCardClicked);
             }
         }
     }

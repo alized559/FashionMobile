@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.media.Rating;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,9 @@ public class ViewProductActivity extends AppCompatActivity {
     RecyclerView reviewsRecyclerView;
     ArrayList<ReviewDataModel> reviewsList = new ArrayList<>();
     ReviewFlexBoxAdapter reviewsAdapter;
+
+    EditText reviewInputText;
+    RatingBar reviewRatingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,10 +206,114 @@ public class ViewProductActivity extends AppCompatActivity {
 
         reviewAddCardView = findViewById(R.id.review_add_cardview);
 
-        EditText reviewInputText = findViewById(R.id.reviewInputText);
-        RatingBar reviewRatingBar = findViewById(R.id.reviewRatingBar);
+        reviewInputText = findViewById(R.id.reviewInputText);
+        reviewRatingBar = findViewById(R.id.reviewRatingBar);
 
-        reviewAddCardView.setEnabled(false);
+        reviewRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+
+            reviewInputText.setEnabled(false);
+            reviewRatingBar.setEnabled(false);
+
+            if(reviewInputText.getText().toString().isEmpty()){
+                reviewInputText.setText("Posted A Review");
+            }
+
+            StringRequest request = new StringRequest(1, ServerUrls.updateReviews, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if(!response.contains("Error")){
+                        ReviewDataModel model = new ReviewDataModel();
+                        model.ReviewID = Integer.parseInt(response.trim());
+                        model.UserID = UserLogin.CurrentLoginID;
+                        model.ProductID = product_id;
+                        model.Title = UserLogin.CurrentLoginUsername;
+                        model.Subtitle = reviewInputText.getText().toString();
+                        model.Ratings = rating;
+                        model.onDeleteClicked = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                reviewInputText.setEnabled(false);
+                                reviewRatingBar.setEnabled(false);
+                                StringRequest request = new StringRequest(1, ServerUrls.updateReviews, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        if(!response.contains("Error")){
+                                            reviewsList.remove(model);
+                                            reviewsAdapter.notifyDataSetChanged();
+                                            reviewInputText.setEnabled(true);
+                                            reviewRatingBar.setEnabled(true);
+                                        }else {
+                                            reviewInputText.setEnabled(false);
+                                            reviewRatingBar.setEnabled(false);
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        reviewInputText.setEnabled(false);
+                                        reviewRatingBar.setEnabled(false);
+                                    }
+                                }) {
+                                    @Nullable
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("type", "remove");
+                                        params.put("id", model.ReviewID + "");
+                                        params.put("prod_id", model.ProductID + "");
+                                        params.put("userID", UserLogin.CurrentLoginID + "");
+                                        return params;
+                                    }
+                                };
+                                request.setRetryPolicy(new DefaultRetryPolicy(
+                                        (int) TimeUnit.SECONDS.toMillis(1000), //After the set time elapses the request will timeout
+                                        0,
+                                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                queue.add(request);
+                            }
+                        };
+                        model.CanDelete = true;
+                        model.Picture = ImageCache.GetProfileImage(UserLogin.CurrentLoginID);
+
+                        reviewsList.add(model);
+                        reviewsAdapter.notifyDataSetChanged();
+                        reviewInputText.setEnabled(false);
+                        reviewRatingBar.setEnabled(false);
+                    }else {
+                        reviewInputText.setEnabled(true);
+                        reviewRatingBar.setEnabled(true);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    reviewInputText.setEnabled(true);
+                    reviewRatingBar.setEnabled(true);
+                    Toast.makeText(ViewProductActivity.this, "Failed to add review, please try again", Toast.LENGTH_LONG).show();
+                }
+            }) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("type", "add");
+                    params.put("prod_id", product_id + "");
+                    params.put("text", reviewInputText.getText().toString());
+                    params.put("rate", rating + "");
+                    params.put("userID", UserLogin.CurrentLoginID + "");
+                    return params;
+                }
+            };
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    (int) TimeUnit.SECONDS.toMillis(1000), //After the set time elapses the request will timeout
+                    0,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            queue.add(request);
+
+        });
+
+        reviewInputText.setEnabled(true);
+        reviewRatingBar.setEnabled(true);
 
         requestProductImages();
 
@@ -360,66 +468,13 @@ public class ViewProductActivity extends AppCompatActivity {
 
         try {
             int item_id = row.getInt("item_id");
-            String name = row.getString("name");
-            int quantity = row.getInt("quantity");
-            String extraName = row.getString("extra_name");
-            String extraOptions = row.getString("extra_options");
-
-            if(isFirstItem){
-                productItemName.setText(name);
-                quantityTextView.setText(quantity + "");
-            }
 
             if (ImageCache.GetProductItemImage(item_id) == null) {
                 ImageRequest request = new ImageRequest(ServerUrls.getProductItemImage(product_id, item_id), new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap response) {
                         ImageCache.SetProductItemImage(item_id, response);
-
-                        MaterialCardView card = new MaterialCardView(ViewProductActivity.this);
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.
-                                LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        lp.setMargins(20, 20, 20, 20);
-                        card.setLayoutParams(lp);
-                        card.setRadius((int) (10 * getResources().getDisplayMetrics().density + 0.5f));
-
-                        ImageView img = new ImageView(ViewProductActivity.this);
-                        img.setImageBitmap(response);
-                        LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(
-                                (int) (105 * getResources().getDisplayMetrics().density + 0.5f),
-                                (int) (105 * getResources().getDisplayMetrics().density + 0.5f));
-                        img.setLayoutParams(lp1);
-                        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                        if(isFirstItem) {
-                            card.setStrokeWidth(2);
-                            currentSelectedItemCard = card;
-                            currentSelectedItemId = item_id;
-                            currentSelectedItemQuantity = quantity;
-                            currentSelectedItemExtraName = extraName;
-                            currentSelectedItemExtraOptions = extraOptions;
-                        }
-                        card.setStrokeColor(getResources().getColor(R.color.black));
-
-                        card.addView(img);
-                        card.setOnClickListener(view -> {
-                            //Add Item Selection Edition
-                            currentSelectedItemCard.setStrokeWidth(0);
-                            card.setStrokeWidth(2);
-                            currentSelectedItemCard = card;
-                            currentSelectedItemId = item_id;
-                            currentSelectedItemQuantity = quantity;
-                            currentSelectedItemExtraName = extraName;
-                            currentSelectedItemExtraOptions = extraOptions;
-
-                            productItemName.setText(name);
-                            quantityTextView.setText(quantity + "");
-
-                            productMainImage.setImageBitmap(response);
-
-                        });
-                        productItemsFlex.addView(card);
-
+                        addProductItem(row, isFirstItem);
                     }
                 }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
                         new Response.ErrorListener() {
@@ -431,17 +486,82 @@ public class ViewProductActivity extends AppCompatActivity {
                         });
                 queue.add(request);
             } else {
-                Bitmap response = ImageCache.GetProductItemImage(item_id);
-                //add item to flex
+                addProductItem(row, isFirstItem);
             }
         }catch(Exception e) {
             Log.d("UIError", e.getMessage() + "");
         }
     }
 
+    public void addProductItem(JSONObject row, boolean isFirstItem){
+
+        try {
+            int item_id = row.getInt("item_id");
+            String name = row.getString("name");
+            int quantity = row.getInt("quantity");
+            String extraName = row.getString("extra_name");
+            String extraOptions = row.getString("extra_options");
+
+            Bitmap response = ImageCache.GetProductItemImage(item_id);
+
+            if (isFirstItem) {
+                productItemName.setText(name);
+                quantityTextView.setText(quantity + "");
+            }
+
+            MaterialCardView card = new MaterialCardView(ViewProductActivity.this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.
+                    LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(20, 20, 20, 20);
+            card.setLayoutParams(lp);
+            card.setRadius((int) (10 * getResources().getDisplayMetrics().density + 0.5f));
+
+            ImageView img = new ImageView(ViewProductActivity.this);
+            img.setImageBitmap(response);
+            LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(
+                    (int) (105 * getResources().getDisplayMetrics().density + 0.5f),
+                    (int) (105 * getResources().getDisplayMetrics().density + 0.5f));
+            img.setLayoutParams(lp1);
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            if (isFirstItem) {
+                card.setStrokeWidth(2);
+                currentSelectedItemCard = card;
+                currentSelectedItemId = item_id;
+                currentSelectedItemQuantity = quantity;
+                currentSelectedItemExtraName = extraName;
+                currentSelectedItemExtraOptions = extraOptions;
+            }
+            card.setStrokeColor(getResources().getColor(R.color.black));
+
+            card.addView(img);
+            card.setOnClickListener(view -> {
+                //Add Item Selection Edition
+                currentSelectedItemCard.setStrokeWidth(0);
+                card.setStrokeWidth(2);
+                currentSelectedItemCard = card;
+                currentSelectedItemId = item_id;
+                currentSelectedItemQuantity = quantity;
+                currentSelectedItemExtraName = extraName;
+                currentSelectedItemExtraOptions = extraOptions;
+
+                productItemName.setText(name);
+                quantityTextView.setText(quantity + "");
+
+                productMainImage.setImageBitmap(response);
+
+            });
+            productItemsFlex.addView(card);
+        }catch (Exception ex){
+            Log.d("UIError", ex.getMessage() + "");
+        }
+    }
+
     public void requestProductReviews(){
         reviewsList.clear();
         reviewsAdapter.notifyDataSetChanged();
+        reviewInputText.setEnabled(true);
+        reviewRatingBar.setEnabled(true);
         JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getProductReviews(product_id), new Response.Listener<JSONArray>() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
@@ -462,8 +582,53 @@ public class ViewProductActivity extends AppCompatActivity {
                         model.Title = UserLogin.CurrentLoginUsername;
                         model.Subtitle = text;
                         model.Ratings = rate;
+                        model.onDeleteClicked = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                reviewInputText.setEnabled(false);
+                                reviewRatingBar.setEnabled(false);
+                                StringRequest request = new StringRequest(1, ServerUrls.updateReviews, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        if(!response.contains("Error")){
+                                            reviewsList.remove(model);
+                                            reviewsAdapter.notifyDataSetChanged();
+                                            reviewInputText.setEnabled(true);
+                                            reviewRatingBar.setEnabled(true);
+                                        }else {
+                                            reviewInputText.setEnabled(false);
+                                            reviewRatingBar.setEnabled(false);
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        reviewInputText.setEnabled(false);
+                                        reviewRatingBar.setEnabled(false);
+                                    }
+                                }) {
+                                    @Nullable
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("type", "remove");
+                                        params.put("id", model.ReviewID + "");
+                                        params.put("prod_id", model.ProductID + "");
+                                        params.put("userID", UserLogin.CurrentLoginID + "");
+                                        return params;
+                                    }
+                                };
+                                request.setRetryPolicy(new DefaultRetryPolicy(
+                                        (int) TimeUnit.SECONDS.toMillis(1000), //After the set time elapses the request will timeout
+                                        0,
+                                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                queue.add(request);
+                            }
+                        };
                         if(UserLogin.CurrentLoginID == user_id){
                             model.CanDelete = true;
+                            reviewInputText.setEnabled(false);
+                            reviewRatingBar.setEnabled(false);
                         }
 
                         if(ImageCache.GetProfileImage(user_id) == null){
@@ -490,9 +655,6 @@ public class ViewProductActivity extends AppCompatActivity {
                             reviewsList.add(model);
                             reviewsAdapter.notifyDataSetChanged();
                         }
-
-
-
                     }
                 } catch(Exception e) {
                     Log.d("UIError", e.getMessage() + "");

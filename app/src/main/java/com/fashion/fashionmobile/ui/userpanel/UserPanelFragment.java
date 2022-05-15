@@ -173,10 +173,10 @@ public class UserPanelFragment extends Fragment {
 
             showMoreReviews.setOnClickListener(view -> {
                 if(showMoreReviews.getText().toString().equalsIgnoreCase("Show More")){
-                    getPostedReviews(-1);
+                    getPostedReviews(root,-1);
                     showMoreReviews.setText("Show Less");
                 }else {
-                    getPostedReviews(6);
+                    getPostedReviews(root, 6);
                     showMoreReviews.setText("Show More");
                 }
             });
@@ -194,7 +194,7 @@ public class UserPanelFragment extends Fragment {
             reviewsAdapter = new ReviewFlexBoxAdapter(root.getContext(), reviewsList);
             reviewsRecyclerView.setAdapter(reviewsAdapter);
 
-            getPostedReviews(6);
+            getPostedReviews(root, 6);
 
             return root;
         }
@@ -394,7 +394,7 @@ public class UserPanelFragment extends Fragment {
         queue.add(request);
     }
 
-    public void getPostedReviews(int maxCount) {
+    public void getPostedReviews(View root, int maxCount) {
 
         reviewsList.clear();
         reviewsAdapter.notifyDataSetChanged();
@@ -420,6 +420,16 @@ public class UserPanelFragment extends Fragment {
                         model.Subtitle = text;
                         model.Ratings = rate;
 
+                        model.CanVisitProduct = true;
+                        model.onCardClicked = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
+                                intent.putExtra("product_id", product_id);
+                                startActivity(intent);
+                            }
+                        };
+
                         if(ImageCache.GetProfileImage(UserLogin.CurrentLoginID) == null){
                             ImageRequest request = new ImageRequest(ServerUrls.getUserImage(UserLogin.CurrentLoginID), new Response.Listener<Bitmap>() {
                                 @Override
@@ -433,7 +443,7 @@ public class UserPanelFragment extends Fragment {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            getPostedReviews(maxCount);
+                                            getPostedReviews(root, maxCount);
                                         }
                                     });
 
@@ -456,7 +466,7 @@ public class UserPanelFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("ReviewsError", error.getMessage() + "");
-                getPostedReviews(maxCount);
+                getPostedReviews(root, maxCount);
             }
         });
         queue.add(request);

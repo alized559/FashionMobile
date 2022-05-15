@@ -1,6 +1,7 @@
 package com.fashion.fashionmobile.adapters;
 
 import android.graphics.Bitmap;
+import android.view.View;
 
 public class ReviewDataModel {
 
@@ -13,6 +14,8 @@ public class ReviewDataModel {
     public Bitmap Picture;
     public boolean CanDelete = false;
     public boolean CanVisitProduct = false;
+    public View.OnClickListener onDeleteClicked = null;
+    public View.OnClickListener onCardClicked = null;
 
 
 

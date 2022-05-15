@@ -16,6 +16,7 @@
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_cart.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_product_list.xml" value="0.20520833333333333" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_slideshow.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_user_panel.xml" value="0.33" />
@@ -38,17 +39,9 @@
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/app_bar_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/category.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/category_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_product_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_categories.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_categories_child.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_child.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_child_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_men.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_products_women.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/fragment_user_panel.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alize/AndroidStudioProjects/FashionMobile/app/src/main/res/layout/image_round.xml" value="0.25416666666666665" />
