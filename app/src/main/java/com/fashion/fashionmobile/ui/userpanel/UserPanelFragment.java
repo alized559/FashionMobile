@@ -1,5 +1,6 @@
 package com.fashion.fashionmobile.ui.userpanel;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
+import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.adapters.ReviewFlexBoxAdapter;
 import com.fashion.fashionmobile.adapters.ReviewDataModel;
 import com.fashion.fashionmobile.databinding.FragmentUserPanelBinding;
@@ -113,7 +115,8 @@ public class UserPanelFragment extends Fragment {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MainActivity.CurrentContext, error.toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(MainActivity.CurrentContext, error.toString(), Toast.LENGTH_SHORT).show();
+                                Log.d("ProfileError", error.getMessage() + "");
                             }
                         });
 
@@ -226,6 +229,11 @@ public class UserPanelFragment extends Fragment {
                         ImageCache.SetProductImage(prod_id, response);
 
                         card.addView(img);
+                        card.setOnClickListener(view -> {
+                            Intent i = new Intent(root.getContext(),ViewProductActivity.class);
+                            i.putExtra("product_id", prod_id);
+                            startActivity(i);
+                        });
                         favoritesFlex.addView(card);
                     }
                 }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888,
@@ -254,6 +262,11 @@ public class UserPanelFragment extends Fragment {
                 img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                 card.addView(img);
+                card.setOnClickListener(view -> {
+                    Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
+                    intent.putExtra("product_id", prod_id);
+                    startActivity(intent);
+                });
                 favoritesFlex.addView(card);
             }
         }
@@ -405,7 +418,7 @@ public class UserPanelFragment extends Fragment {
                         model.ProductID = product_id;
                         model.Title = UserLogin.CurrentLoginUsername + " • " + prod_name;
                         model.Subtitle = text;
-                        model.Ratings = "Ratings: " + rate + " / 5.0";
+                        model.Ratings = rate;
 
                         if(ImageCache.GetProfileImage(UserLogin.CurrentLoginID) == null){
                             ImageRequest request = new ImageRequest(ServerUrls.getUserImage(UserLogin.CurrentLoginID), new Response.Listener<Bitmap>() {

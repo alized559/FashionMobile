@@ -1,5 +1,7 @@
 package com.fashion.fashionmobile.helpers;
 
+import android.provider.ContactsContract;
+
 public class ServerUrls {
     private static String WebsiteUrl = "http://195.62.33.125/mobile/";
 
@@ -21,6 +23,23 @@ public class ServerUrls {
         return WebsiteUrl + "getUserImage.php?id=" + id;
     }
 
+    public static String getProduct(int prod_id) {
+        return WebsiteUrl + "getProduct.php?id=" + prod_id + "&currency=" + UserLogin.CurrentCurrency;
+    }
+
+    public static String getProductItems(int prod_id){
+        return WebsiteUrl + "getProductItems.php?id=" + prod_id;
+    }
+
+    public static String getProductItemImage(int prod_id, int item_id){
+        return WebsiteUrl + "getProductItemImage.php?id=" + prod_id + "&item=" + item_id;
+    }
+
+    public static String getProductReviews(int prod_id) {
+        return WebsiteUrl + "getPostedReviews.php?id=" + prod_id;
+    }
+
+    public static String updateLikes = WebsiteUrl + "updateLikes.php";
 
     public static String changeProfileImage = WebsiteUrl + "changeProfileImage.php";
 

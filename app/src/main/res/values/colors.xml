@@ -17,4 +17,8 @@
     <color name="state_delivered">#26b40d</color>
     <color name="state_returned">#ff1414</color>
     <color name="state_ontheway">#093ce4</color>
+
+    <color name="product_nolike">#AAB8C2</color>
+    <color name="product_like">#E2264D</color>
+
 </resources>

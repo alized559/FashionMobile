@@ -1,5 +1,6 @@
 package com.fashion.fashionmobile.ui.home;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -35,6 +36,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.databinding.FragmentHomeBinding;
 import com.fashion.fashionmobile.helpers.ImageCache;
 import com.fashion.fashionmobile.helpers.ServerUrls;
@@ -133,6 +135,12 @@ public class HomeFragment extends Fragment {
                                             LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                     card.setLayoutParams(lp);
                                     card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
+
+                                    card.setOnClickListener(view -> {
+                                        Intent i = new Intent(root.getContext(), ViewProductActivity.class);
+                                        i.putExtra("product_id", prod_id);
+                                        startActivity(i);
+                                    });
 
                                     ImageView img = new ImageView(root.getContext());
                                     img.setImageBitmap(response);
@@ -252,6 +260,12 @@ public class HomeFragment extends Fragment {
                                     LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             card.setLayoutParams(lp);
                             card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
+
+                            card.setOnClickListener(view -> {
+                                Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
+                                intent.putExtra("product_id", prod_id);
+                                startActivity(intent);
+                            });
 
                             ImageView img = new ImageView(root.getContext());
                             img.setImageBitmap(ImageCache.GetProductImage(prod_id));
@@ -384,6 +398,13 @@ public class HomeFragment extends Fragment {
                                             (int) (5 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
                                     card.setLayoutParams(lp);
                                     card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
+
+                                    card.setOnClickListener(view -> {
+                                        Intent i = new Intent(root.getContext(),ViewProductActivity.class);
+                                        i.putExtra("product_id", prod_id);
+                                        startActivity(i);
+                                    });
+
                                     ImageView img = new ImageView(root.getContext());
                                     img.setImageBitmap(response);
                                     LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(
@@ -419,6 +440,12 @@ public class HomeFragment extends Fragment {
                                     (int) (5 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
                             card.setLayoutParams(lp);
                             card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
+                            card.setOnClickListener(view -> {
+                                Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
+                                intent.putExtra("product_id", prod_id);
+                                startActivity(intent);
+                            });
+
                             ImageView img = new ImageView(root.getContext());
                             img.setImageBitmap(ImageCache.GetNewDropProductImageCache(prod_id));
                             LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(

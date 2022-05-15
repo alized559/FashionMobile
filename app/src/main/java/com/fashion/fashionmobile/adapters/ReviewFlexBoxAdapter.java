@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,14 +43,15 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView picture, delete;
-        TextView title, subtitle, rating;
+        TextView title, subtitle;
+        RatingBar rating;
 
         public ViewHolder(View itemView) {
             super(itemView);
             picture = itemView.findViewById(R.id.review_picture);
             title = itemView.findViewById(R.id.review_title);
             subtitle = itemView.findViewById(R.id.review_subtitle);
-            rating = itemView.findViewById(R.id.review_ratings);
+            rating = itemView.findViewById(R.id.review_rating);
             delete = itemView.findViewById(R.id.review_delete);
         }
 
@@ -57,7 +59,12 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
             picture.setImageBitmap(model.Picture);
             title.setText(model.Title);
             subtitle.setText(model.Subtitle);
-            rating.setText(model.Ratings);
+            rating.setRating((float) model.Ratings);
+            if(model.CanDelete){
+                delete.setVisibility(View.VISIBLE);
+            }else {
+                delete.setVisibility(View.GONE);
+            }
         }
     }
 }
