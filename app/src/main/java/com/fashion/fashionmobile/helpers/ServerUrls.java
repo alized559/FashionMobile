@@ -36,7 +36,11 @@ public class ServerUrls {
     }
 
     public static String getProductReviews(int prod_id) {
-        return WebsiteUrl + "getPostedReviews.php?id=" + prod_id;
+        return WebsiteUrl + "getProductReviews.php?id=" + prod_id;
+    }
+
+    public static String addCartItem(int prod_id, int item, String extraName, String extraValue){
+        return WebsiteUrl + "manageCart.php?userID=" + UserLogin.CurrentLoginID + "&id=" + prod_id + "&item=" + item + "&type=add&dataName=" + extraName + "&dataValue=" + extraValue;
     }
 
     public static String updateReviews = WebsiteUrl + "updateReviews.php";

@@ -16,16 +16,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -38,10 +42,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.adapters.ReviewDataModel;
 import com.fashion.fashionmobile.adapters.ReviewFlexBoxAdapter;
+import com.fashion.fashionmobile.adapters.SpinnerAdapter;
 import com.fashion.fashionmobile.helpers.ImageCache;
 import com.fashion.fashionmobile.helpers.ServerUrls;
 import com.fashion.fashionmobile.helpers.UserLikes;
@@ -53,6 +59,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -99,6 +106,14 @@ public class ViewProductActivity extends AppCompatActivity {
 
     EditText reviewInputText;
     RatingBar reviewRatingBar;
+
+    int TotalRaters = 0;
+    double totalRatings = 0;
+
+    ArrayList<String> ExtraOptions = new ArrayList<>();
+    SpinnerAdapter extraSpinnerAdapter;
+    Spinner extraSpinner;
+    TextView extraTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +253,11 @@ public class ViewProductActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(String response) {
                                         if(!response.contains("Error")){
+                                            if(ratingsTextView != null) {
+                                                TotalRaters--;
+                                                totalRatings -= model.Ratings;
+                                                ratingsTextView.setText((totalRatings / TotalRaters) + "");
+                                            }
                                             reviewsList.remove(model);
                                             reviewsAdapter.notifyDataSetChanged();
                                             reviewInputText.setEnabled(true);
@@ -277,6 +297,11 @@ public class ViewProductActivity extends AppCompatActivity {
 
                         reviewsList.add(model);
                         reviewsAdapter.notifyDataSetChanged();
+                        if(ratingsTextView != null) {
+                            TotalRaters++;
+                            totalRatings += rating;
+                            ratingsTextView.setText((totalRatings / TotalRaters) + "");
+                        }
                         reviewInputText.setEnabled(false);
                         reviewRatingBar.setEnabled(false);
                     }else {
@@ -314,6 +339,74 @@ public class ViewProductActivity extends AppCompatActivity {
 
         reviewInputText.setEnabled(true);
         reviewRatingBar.setEnabled(true);
+
+        extraSpinner = findViewById(R.id.product_item_extra_spinner);
+        extraTextView = findViewById(R.id.product_item_extra_text);
+
+        extraSpinnerAdapter = new SpinnerAdapter(this, ExtraOptions);
+        extraSpinner.setAdapter(extraSpinnerAdapter);
+
+        extraSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        extraTextView.setVisibility(View.GONE);
+        extraSpinner.setVisibility(View.GONE);
+
+        Button addToCartButton = findViewById(R.id.addToCartButton);
+
+        if(!UserLogin.isLoggedIn){
+            addToCartButton.setVisibility(View.GONE);
+        }
+
+        addToCartButton.setOnClickListener(v -> {
+            addToCartButton.setEnabled(false);
+            String currentExtra = extraTextView.getText().toString();
+            String currentExtraValue = ExtraOptions.get(extraSpinner.getSelectedItemPosition());
+            JsonObjectRequest request = new JsonObjectRequest(ServerUrls.addCartItem(product_id, currentSelectedItemId, currentExtra, currentExtraValue), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("CartAddResult", response.toString());
+                    try {
+                        //JSONObject row = response.getJSONObject(0);
+                        if(response.getString("state").equalsIgnoreCase("SUCCESS")){
+                            Snackbar.make(v, "Cart Item Added Successfully!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }else {
+                            Snackbar.make(v, "Failed To Add Item To Cart!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+
+
+                    } catch (Exception e) {
+                        Log.d("UIError", e.getMessage() + "");
+                    }
+                    addToCartButton.setEnabled(true);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("CartAddError", error.getMessage() + "");
+                    addToCartButton.setEnabled(true);
+                    Snackbar.make(v, "Failed To Add Item To Cart!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    (int) TimeUnit.SECONDS.toMillis(1000), //After the set time elapses the request will timeout
+                    0,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            queue.add(request);
+
+        });
 
         requestProductImages();
 
@@ -531,6 +624,25 @@ public class ViewProductActivity extends AppCompatActivity {
                 currentSelectedItemQuantity = quantity;
                 currentSelectedItemExtraName = extraName;
                 currentSelectedItemExtraOptions = extraOptions;
+                if(extraName.isEmpty()){
+                    extraTextView.setText("Extra");
+                    ExtraOptions.clear();
+                    ExtraOptions.add("none");
+                    extraSpinnerAdapter.notifyDataSetChanged();
+                    extraTextView.setVisibility(View.GONE);
+                    extraSpinner.setSelection(0);
+                    extraSpinner.setVisibility(View.GONE);
+                }else {
+                    extraTextView.setVisibility(View.VISIBLE);
+                    extraSpinner.setVisibility(View.VISIBLE);
+                    extraTextView.setText(extraName);
+                    ExtraOptions.clear();
+                    String[] items = extraOptions.split("\n");
+                    for(String item : items){
+                        ExtraOptions.add(item);
+                    }
+                    extraSpinnerAdapter.notifyDataSetChanged();
+                }
             }
             card.setStrokeColor(getResources().getColor(R.color.black));
 
@@ -544,6 +656,26 @@ public class ViewProductActivity extends AppCompatActivity {
                 currentSelectedItemQuantity = quantity;
                 currentSelectedItemExtraName = extraName;
                 currentSelectedItemExtraOptions = extraOptions;
+
+                if(extraName.isEmpty()){
+                    extraTextView.setText("Extra");
+                    ExtraOptions.clear();
+                    ExtraOptions.add("none");
+                    extraSpinnerAdapter.notifyDataSetChanged();
+                    extraTextView.setVisibility(View.GONE);
+                    extraSpinner.setSelection(0);
+                    extraSpinner.setVisibility(View.GONE);
+                }else {
+                    extraTextView.setVisibility(View.VISIBLE);
+                    extraSpinner.setVisibility(View.VISIBLE);
+                    extraTextView.setText(extraName);
+                    ExtraOptions.clear();
+                    String[] items = extraOptions.split("\n");
+                    for(String item : items){
+                        ExtraOptions.add(item);
+                    }
+                    extraSpinnerAdapter.notifyDataSetChanged();
+                }
 
                 productItemName.setText(name);
                 quantityTextView.setText(quantity + "");
@@ -562,6 +694,12 @@ public class ViewProductActivity extends AppCompatActivity {
         reviewsAdapter.notifyDataSetChanged();
         reviewInputText.setEnabled(true);
         reviewRatingBar.setEnabled(true);
+        TotalRaters = 0;
+        totalRatings = 0;
+        if(ratingsTextView != null){
+            ratingsTextView.setText("0");
+        }
+        Log.d("Reviews", "Loading Reviews For " + product_id);
         JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getProductReviews(product_id), new Response.Listener<JSONArray>() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
@@ -574,6 +712,11 @@ public class ViewProductActivity extends AppCompatActivity {
                         int product_id = row.getInt("product_id");
                         String text = row.getString("text");
                         double rate = row.getDouble("rate");
+                        TotalRaters++;
+                        totalRatings += rate;
+                        if(ratingsTextView != null) {
+                            ratingsTextView.setText((totalRatings / TotalRaters) + "");
+                        }
 
                         ReviewDataModel model = new ReviewDataModel();
                         model.ReviewID = rev_id;
@@ -591,6 +734,11 @@ public class ViewProductActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(String response) {
                                         if(!response.contains("Error")){
+                                            if(ratingsTextView != null) {
+                                                TotalRaters--;
+                                                totalRatings -= model.Ratings;
+                                                ratingsTextView.setText((totalRatings / TotalRaters) + "");
+                                            }
                                             reviewsList.remove(model);
                                             reviewsAdapter.notifyDataSetChanged();
                                             reviewInputText.setEnabled(true);
