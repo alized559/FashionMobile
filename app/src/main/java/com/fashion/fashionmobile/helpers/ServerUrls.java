@@ -36,7 +36,27 @@ public class ServerUrls {
     }
 
     public static String getProductReviews(int prod_id) {
-        return WebsiteUrl + "getPostedReviews.php?id=" + prod_id;
+        return WebsiteUrl + "getProductReviews.php?id=" + prod_id;
+    }
+
+    public static String addCartItem(int prod_id, int item, String extraName, String extraValue){
+        return WebsiteUrl + "manageCart.php?userID=" + UserLogin.CurrentLoginID + "&id=" + prod_id + "&item=" + item + "&type=add&dataName=" + extraName + "&dataValue=" + extraValue;
+    }
+
+    public static String getCartItems() {
+        return WebsiteUrl + "getCart.php?userID=" + UserLogin.CurrentLoginID + "&currency=" + UserLogin.CurrentCurrency;
+    }
+
+    public static String removeCartItem(int item){
+        return WebsiteUrl + "manageCart.php?id=" + item + "&type=remove&userID=" + UserLogin.CurrentLoginID;
+    }
+
+    public static String editCartItem(int item, int amount){
+        return WebsiteUrl + "manageCart.php?id=" + item + "&type=edit&userID=" + UserLogin.CurrentLoginID + "&amount=" + amount;
+    }
+
+    public static String removeAllCartItems(){
+        return WebsiteUrl + "manageCart.php?userID=" + UserLogin.CurrentLoginID + "&type=removeall&id=0";
     }
 
     public static String updateReviews = WebsiteUrl + "updateReviews.php";

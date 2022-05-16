@@ -232,7 +232,7 @@ public class UserPanelFragment extends Fragment {
                         card.setOnClickListener(view -> {
                             Intent i = new Intent(root.getContext(),ViewProductActivity.class);
                             i.putExtra("product_id", prod_id);
-                            startActivity(i);
+                            startActivityForResult(i, 1);
                         });
                         favoritesFlex.addView(card);
                     }
@@ -265,7 +265,7 @@ public class UserPanelFragment extends Fragment {
                 card.setOnClickListener(view -> {
                     Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
                     intent.putExtra("product_id", prod_id);
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                 });
                 favoritesFlex.addView(card);
             }
@@ -426,7 +426,7 @@ public class UserPanelFragment extends Fragment {
                             public void onClick(View v) {
                                 Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
                                 intent.putExtra("product_id", product_id);
-                                startActivity(intent);
+                                startActivityForResult(intent, 1);
                             }
                         };
 
