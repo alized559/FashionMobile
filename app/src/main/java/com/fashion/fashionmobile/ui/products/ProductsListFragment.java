@@ -7,10 +7,21 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,20 +29,22 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.R;
 import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.databinding.FragmentProductsBinding;
+import com.fashion.fashionmobile.databinding.FragmentProductsCategoriesBinding;
+import com.fashion.fashionmobile.databinding.FragmentProductsFilterBinding;
+import com.fashion.fashionmobile.helpers.CategoryDataModel;
 import com.fashion.fashionmobile.helpers.ImageCache;
 import com.fashion.fashionmobile.helpers.ServerUrls;
 import com.fashion.fashionmobile.helpers.UserLogin;
@@ -41,8 +54,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
-public class ProductsFragment extends Fragment {
+public class ProductsListFragment extends Fragment {
 
     private FragmentProductsBinding binding;
     private FlexboxLayout flex;
@@ -50,27 +68,50 @@ public class ProductsFragment extends Fragment {
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private RelativeLayout loading;
     private ScrollView page;
+    private String state = ProductsCategoriesFragment.state;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public static ArrayList<String> selectedShoes = new ArrayList<>();
+    public static ArrayList<String> selectedClothing = new ArrayList<>();
+    public static ArrayList<String> selectedAccessories = new ArrayList<>();
+    public static ArrayList<String> selectedBrand = new ArrayList<>();
+    public static ArrayList<String> selectedName = new ArrayList<>();
+    public static ArrayList<String> selectedPrice = new ArrayList<>();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         page = root.findViewById(R.id.view);
-        page.setVisibility(View.GONE);
+//        page.setVisibility(View.GONE);
         loading = root.findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
 
         queue = Volley.newRequestQueue(root.getContext());
         flex = root.findViewById(R.id.flexLayout);
 
+//        Toast.makeText(root.getContext(), String.valueOf(selectedShoes.size()), Toast.LENGTH_SHORT).show();
+
         getProducts(root);
 
+        Button filterBtn = root.findViewById(R.id.filter_btn);
+        filterBtn.setOnClickListener(view -> {
+            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+            ft.setReorderingAllowed(true);
+            ft.replace(R.id.nav_host_fragment_content_main, ProductsFilterFragment.class, null);
+            ft.addToBackStack(ProductsFilterFragment.class.getName());
+            ft.commit();
+        });
+
         return root;
+
     }
 
     public void getProducts(View root) {
         flex.removeAllViews();
-        JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getAllProducts + "?currency=" + UserLogin.CurrentCurrency, new Response.Listener<JSONArray>() {
+        JSONArray aparams = new JSONArray(selectedShoes);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, ServerUrls.getAllProducts + "?currency=" + UserLogin.CurrentCurrency + "&state=" + state, aparams, new Response.Listener<JSONArray>() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onResponse(JSONArray response) {
@@ -82,6 +123,8 @@ public class ProductsFragment extends Fragment {
                         String brand = row.getString("brand");
                         double price = row.getDouble("price");
                         double discount = row.getDouble("discount");
+
+                        Toast.makeText(root.getContext(), "ss", Toast.LENGTH_SHORT).show();
 
                         if(ImageCache.GetProductImage(prod_id) == null) {
                             JSONArray r = response;
@@ -364,8 +407,17 @@ public class ProductsFragment extends Fragment {
                 //Toast.makeText(root.getContext(), "Server Error Occurred!", Toast.LENGTH_SHORT).show();
                 getProducts(root);
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
         queue.add(request);
+
     }
 
     @Override
