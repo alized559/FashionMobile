@@ -1,6 +1,7 @@
 package com.fashion.fashionmobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -160,6 +161,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data != null && data.getBooleanExtra("returnToCart", false) == true){//Returning From View Product And Going To Cart
+            //navController.navigate(R.id.nav_cart);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

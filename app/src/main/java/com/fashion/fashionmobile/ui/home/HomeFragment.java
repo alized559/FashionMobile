@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment {
                                     card.setOnClickListener(view -> {
                                         Intent i = new Intent(root.getContext(), ViewProductActivity.class);
                                         i.putExtra("product_id", prod_id);
-                                        startActivity(i);
+                                        startActivityForResult(i, 1);
                                     });
 
                                     ImageView img = new ImageView(root.getContext());
@@ -264,7 +264,7 @@ public class HomeFragment extends Fragment {
                             card.setOnClickListener(view -> {
                                 Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
                                 intent.putExtra("product_id", prod_id);
-                                startActivity(intent);
+                                startActivityForResult(intent, 1);
                             });
 
                             ImageView img = new ImageView(root.getContext());
@@ -402,7 +402,7 @@ public class HomeFragment extends Fragment {
                                     card.setOnClickListener(view -> {
                                         Intent i = new Intent(root.getContext(),ViewProductActivity.class);
                                         i.putExtra("product_id", prod_id);
-                                        startActivity(i);
+                                        startActivityForResult(i, 1);
                                     });
 
                                     ImageView img = new ImageView(root.getContext());
@@ -443,7 +443,7 @@ public class HomeFragment extends Fragment {
                             card.setOnClickListener(view -> {
                                 Intent intent = new Intent(root.getContext(),ViewProductActivity.class);
                                 intent.putExtra("product_id", prod_id);
-                                startActivity(intent);
+                                startActivityForResult(intent, 1);
                             });
 
                             ImageView img = new ImageView(root.getContext());

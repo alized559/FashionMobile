@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -378,8 +379,16 @@ public class ViewProductActivity extends AppCompatActivity {
                     try {
                         //JSONObject row = response.getJSONObject(0);
                         if(response.getString("state").equalsIgnoreCase("SUCCESS")){
-                            Snackbar.make(v, "Cart Item Added Successfully!", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            Snackbar.make(v, "Item Added Successfully!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();/*new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent resultIntent = new Intent();
+                                            resultIntent.putExtra("returnToCart", true);  // put data that you want returned to activity A
+                                            setResult(Activity.RESULT_OK, resultIntent);
+                                            finish();
+                                        }
+                                    }).show();*/
                         }else {
                             Snackbar.make(v, "Failed To Add Item To Cart!", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();

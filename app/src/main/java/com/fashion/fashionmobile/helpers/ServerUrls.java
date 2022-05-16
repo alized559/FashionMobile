@@ -43,6 +43,22 @@ public class ServerUrls {
         return WebsiteUrl + "manageCart.php?userID=" + UserLogin.CurrentLoginID + "&id=" + prod_id + "&item=" + item + "&type=add&dataName=" + extraName + "&dataValue=" + extraValue;
     }
 
+    public static String getCartItems() {
+        return WebsiteUrl + "getCart.php?userID=" + UserLogin.CurrentLoginID + "&currency=" + UserLogin.CurrentCurrency;
+    }
+
+    public static String removeCartItem(int item){
+        return WebsiteUrl + "manageCart.php?id=" + item + "&type=remove&userID=" + UserLogin.CurrentLoginID;
+    }
+
+    public static String editCartItem(int item, int amount){
+        return WebsiteUrl + "manageCart.php?id=" + item + "&type=edit&userID=" + UserLogin.CurrentLoginID + "&amount=" + amount;
+    }
+
+    public static String removeAllCartItems(){
+        return WebsiteUrl + "manageCart.php?userID=" + UserLogin.CurrentLoginID + "&type=removeall&id=0";
+    }
+
     public static String updateReviews = WebsiteUrl + "updateReviews.php";
 
     public static String updateLikes = WebsiteUrl + "updateLikes.php";
