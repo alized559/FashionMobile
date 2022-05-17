@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static NavController navController = null;
 
-    public static FloatingActionButton CartFab = null;
     public static ImageView UserLikesImage = null, UserLogoutImage = null;
 
     public static ArrayList<String> CurrencyList = new ArrayList<String>(){
@@ -74,14 +73,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        CartFab = binding.appBarMain.cartFab;
-        binding.appBarMain.cartFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "This is going to be the cart", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -106,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         UserLikesImage = binding.appBarMain.mainToolbarLikes;
         UserLogoutImage = binding.appBarMain.mainToolbarLogout;
 
-        CartFab.setVisibility(View.GONE);
         UserLikesImage.setVisibility(View.GONE);
         UserLogoutImage.setVisibility(View.GONE);
 

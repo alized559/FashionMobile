@@ -84,8 +84,6 @@ public class CartFragment extends Fragment {
         binding = FragmentCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        MainActivity.CartFab.setVisibility(View.GONE);
-
         removeAllText = root.findViewById(R.id.cart_remove_all_text);
         removeAllText.setVisibility(View.GONE);
 

@@ -24,7 +24,18 @@
         <item>4.5</item>
         <item>5.0</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="department_array">
+        <item>Men</item>
+        <item>Women</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="category_array">
+        <item>Shoes</item>
+        <item>Clothing</item>
+        <item>Accessories</item>
+        <item>All</item>
+    </string-array>
 
 </resources>

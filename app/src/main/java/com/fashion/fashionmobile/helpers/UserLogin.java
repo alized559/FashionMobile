@@ -90,7 +90,6 @@ public class UserLogin {
                         MainActivity.profileEmail.setText(UserLogin.CurrentLoginEmail);
                         MainActivity.profileCard.setVisibility(View.INVISIBLE);
 
-                        MainActivity.CartFab.setVisibility(View.VISIBLE);
                         MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
                         MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
@@ -199,7 +198,6 @@ public class UserLogin {
         MainActivity.profileCard.setVisibility(View.INVISIBLE);
         MainActivity.profileName.setText("");
         MainActivity.profileEmail.setText("");
-        MainActivity.CartFab.setVisibility(View.GONE);
         MainActivity.UserLikesImage.setVisibility(View.GONE);
         MainActivity.UserLogoutImage.setVisibility(View.GONE);
     }

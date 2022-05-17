@@ -83,8 +83,6 @@ public class UserPanelFragment extends Fragment {
 
             CardView userImageCardView = root.findViewById(R.id.user_image_card_view);
 
-            MainActivity.CartFab.setVisibility(View.VISIBLE);
-
             MainActivity.profileName.setText(UserLogin.CurrentLoginFullName);
             MainActivity.profileEmail.setText(UserLogin.CurrentLoginEmail);
             MainActivity.profileImage.setImageDrawable(null);

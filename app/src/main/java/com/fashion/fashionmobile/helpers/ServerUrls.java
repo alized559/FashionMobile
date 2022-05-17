@@ -1,6 +1,9 @@
 package com.fashion.fashionmobile.helpers;
 
 import android.provider.ContactsContract;
+import android.util.Log;
+
+import java.util.HashMap;
 
 public class ServerUrls {
     private static String WebsiteUrl = "http://195.62.33.125/mobile/";
@@ -81,9 +84,24 @@ public class ServerUrls {
         return WebsiteUrl + "getNewDropsImage.php?id=" + id;
     }
 
-    public static String getAllProducts = WebsiteUrl + "getProducts.php";
+    public static String getAllProducts(HashMap<String, String> filter) {
+        String current = WebsiteUrl + "getProducts.php?currency=" + UserLogin.CurrentCurrency;
+        for(String key : filter.keySet()){
+            String value = filter.get(key);
+            current += "&" + key + "=" + value;
+        }
+        return current;
+    }
 
+    public static String getAllProducts() {
+        return WebsiteUrl + "getProducts.php?currency=" + UserLogin.CurrentCurrency;
+    }
+
+<<<<<<< HEAD
     public static String getProductsFilter = WebsiteUrl + "getProductsFilter.php";
 
     public static String getSummary = WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID;
+=======
+    public static String getAllBrands = WebsiteUrl + "getAllBrands.php";
+>>>>>>> b7acbaa86fdc5e6668ad7a5e3abd3585e546138a
 }

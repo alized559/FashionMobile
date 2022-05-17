@@ -15,10 +15,15 @@
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/activity_view_product.xml" value="0.33" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/cart_item_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/category_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_cart.xml" value="0.33" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products.xml" value="0.36666666666666664" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_product_list.xml" value="0.25815217391304346" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products.xml" value="0.22" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products_categories.xml" value="0.36666666666666664" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products_filter.xml" value="0.36666666666666664" />
+        <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_products_filter_child.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_slideshow.xml" value="0.36666666666666664" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_user_panel.xml" value="0.33" />
         <entry key="..\:/Senior Project/FashionMobile/app/src/main/res/layout/fragment_user_panel_login.xml" value="0.36666666666666664" />
