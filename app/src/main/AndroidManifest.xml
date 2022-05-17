@@ -15,12 +15,15 @@
         android:theme="@style/Theme.FashionMobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CheckoutInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".SummaryActivity"
-            android:exported="false">
+            android:exported="true">
         </activity>
         <activity
             android:name=".CheckoutActivity"
-            android:exported="false">
+            android:exported="true">
         </activity>
         <activity
             android:name=".ViewProductActivity"

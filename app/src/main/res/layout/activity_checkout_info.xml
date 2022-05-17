@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutInfoActivity"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shipping Contact Info"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:layout_marginTop="3dp" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/vertical_line"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Address"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/address1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/address2Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/vertical_line"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="15dp"
+        android:text="Cash On Delivery"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="3dp"/>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flexLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:justifyContent="space_between"
+        app:flexDirection="row">
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+</LinearLayout>

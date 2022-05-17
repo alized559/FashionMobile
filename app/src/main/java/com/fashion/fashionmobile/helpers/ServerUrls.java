@@ -104,4 +104,8 @@ public class ServerUrls {
     }
 
     public static String getAllBrands = WebsiteUrl + "getAllBrands.php";
+
+    public static String placeOrder() {
+        return WebsiteUrl + "placeOrder.php" + UserLogin.CurrentLoginID;
+    }
 }

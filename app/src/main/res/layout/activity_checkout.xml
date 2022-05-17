@@ -6,4 +6,181 @@
     android:layout_height="match_parent"
     tools:context=".CheckoutActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Information"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16dp"
+                    android:textColor="@color/red"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Full Name"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16dp"/>
+
+                <EditText
+                    android:id="@+id/fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your fullname"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16dp"
+                    android:text="Address"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/address1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City, House, Floor, Street Address"/>
+
+                <Spinner
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/address_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Country"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="16dp"/>
+
+                        <Spinner
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/country_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile Number"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="16dp"/>
+
+                        <EditText
+                            android:id="@+id/mobile_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="3 908070"/>
+
+                    </LinearLayout>
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Information"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash On Delivery"
+                android:checked="true"/>
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="15dp" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:justifyContent="space_between"
+                app:flexDirection="row">
+
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/next_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/white"/>
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

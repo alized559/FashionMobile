@@ -3,6 +3,7 @@ package com.fashion.fashionmobile;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -58,6 +59,7 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                ((Activity) SummaryActivity.this).overridePendingTransition(0, 0);
             }
         });
 
@@ -66,6 +68,7 @@ public class SummaryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(SummaryActivity.this, CheckoutActivity.class);
                 startActivity(i);
+                ((Activity) SummaryActivity.this).overridePendingTransition(0, 0);
             }
         });
     }
