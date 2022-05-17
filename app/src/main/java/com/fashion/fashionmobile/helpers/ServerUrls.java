@@ -84,4 +84,6 @@ public class ServerUrls {
     public static String getAllProducts = WebsiteUrl + "getProducts.php";
 
     public static String getProductsFilter = WebsiteUrl + "getProductsFilter.php";
+
+    public static String getSummary = WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID;
 }

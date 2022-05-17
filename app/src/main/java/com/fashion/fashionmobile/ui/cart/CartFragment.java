@@ -1,5 +1,7 @@
 package com.fashion.fashionmobile.ui.cart;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Build;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
+import com.fashion.fashionmobile.SummaryActivity;
 import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.adapters.CartFlexBoxAdapter;
 import com.fashion.fashionmobile.adapters.CartItemDataModel;
@@ -164,7 +167,15 @@ public class CartFragment extends Fragment {
 
             requestCartItems();
 
+            gotoCheckoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getActivity(), SummaryActivity.class);
+                    startActivity(i);
+                }
+            });
         }
+
         return root;
     }
 
