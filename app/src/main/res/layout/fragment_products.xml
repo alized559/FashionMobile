@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.products.ProductsCategoriesFragment">
+    tools:context=".ui.products.ProductsFragment">
 
     <RelativeLayout
         android:id="@+id/loading"
@@ -51,14 +51,14 @@
             </LinearLayout>
 
             <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flexLayout"
+                android:id="@+id/products_flex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                app:justifyContent="space_between"
+                app:justifyContent="center"
                 app:flexDirection="row"
                 app:flexWrap="wrap">
 

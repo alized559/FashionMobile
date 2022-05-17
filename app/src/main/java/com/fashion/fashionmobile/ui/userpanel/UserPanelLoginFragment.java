@@ -150,7 +150,6 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
 
-                                    MainActivity.CartFab.setVisibility(View.VISIBLE);
                                     MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
                                     MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
@@ -241,7 +240,6 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
 
-                                    MainActivity.CartFab.setVisibility(View.VISIBLE);
                                     MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
                                     MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 

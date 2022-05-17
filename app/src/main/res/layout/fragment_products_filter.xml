@@ -34,10 +34,202 @@
 
     </com.google.android.flexbox.FlexboxLayout>
 
-    <ListView
-        android:id="@+id/filter_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="18dp"
+                android:text="Department"/>
+
+            <org.honorato.multistatetogglebutton.MultiStateToggleButton
+                android:id="@+id/department_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                app:values="@array/department_array"
+                app:mstbPrimaryColor="@color/vertical_line"
+                app:mstbSecondaryColor="@color/blue"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Category"/>
+
+            <org.honorato.multistatetogglebutton.MultiStateToggleButton
+                android:id="@+id/category_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                app:values="@array/category_array"
+                app:mstbPrimaryColor="@color/vertical_line"
+                app:mstbSecondaryColor="@color/blue"/>
+
+            <TextView
+                android:id="@+id/typeTextView"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Type"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="15dp"
+                android:id="@+id/typeChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:singleSelection="true">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Brand"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="15dp"
+                android:id="@+id/brandChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:singleSelection="true">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Sale"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="15dp"
+                android:id="@+id/saleChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sale_ascending_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Ascending"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sale_descending_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Descending"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Price"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="15dp"
+                android:id="@+id/priceChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/price_ascending_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Ascending"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/price_descending_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Descending"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:text="Name"/>
+
+            <EditText
+                android:id="@+id/search_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#f9f9f9"
+                android:ems="10"
+                android:fontFamily="@font/inter_medium"
+                android:hint="Enter a product's name here"
+                android:minLines="1"
+                android:maxLines="3"
+                android:inputType="textMultiLine"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="15dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

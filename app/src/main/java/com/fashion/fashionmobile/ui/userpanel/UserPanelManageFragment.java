@@ -68,8 +68,6 @@ public class UserPanelManageFragment extends Fragment {
 
         queue = Volley.newRequestQueue(root.getContext());
 
-        MainActivity.CartFab.setVisibility(View.GONE);
-
         EditText fullnameInput = root.findViewById(R.id.fullnameInputText);
         Button changeFullname = root.findViewById(R.id.userChangeFullname);
 
