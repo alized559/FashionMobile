@@ -97,11 +97,8 @@ public class ServerUrls {
         return WebsiteUrl + "getProducts.php?currency=" + UserLogin.CurrentCurrency;
     }
 
-<<<<<<< HEAD
     public static String getProductsFilter = WebsiteUrl + "getProductsFilter.php";
 
     public static String getSummary = WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID;
-=======
     public static String getAllBrands = WebsiteUrl + "getAllBrands.php";
->>>>>>> b7acbaa86fdc5e6668ad7a5e3abd3585e546138a
 }
