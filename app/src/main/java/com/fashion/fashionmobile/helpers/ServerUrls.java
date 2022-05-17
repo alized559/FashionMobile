@@ -99,6 +99,9 @@ public class ServerUrls {
 
     public static String getProductsFilter = WebsiteUrl + "getProductsFilter.php";
 
-    public static String getSummary = WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID;
+    public static String getSummary() {
+        return WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID + "&currency=" + UserLogin.CurrentCurrency;
+    }
+
     public static String getAllBrands = WebsiteUrl + "getAllBrands.php";
 }
