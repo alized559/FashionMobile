@@ -90,7 +90,9 @@ public class UserLogin {
                         MainActivity.profileEmail.setText(UserLogin.CurrentLoginEmail);
                         MainActivity.profileCard.setVisibility(View.INVISIBLE);
 
-                        MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
+                        if(type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("driver")) {
+                            MainActivity.UserOrdersImage.setVisibility(View.VISIBLE);
+                        }
                         MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
                         int currentID = UserLogin.CurrentLoginID;
@@ -198,7 +200,7 @@ public class UserLogin {
         MainActivity.profileCard.setVisibility(View.INVISIBLE);
         MainActivity.profileName.setText("");
         MainActivity.profileEmail.setText("");
-        MainActivity.UserLikesImage.setVisibility(View.GONE);
+        MainActivity.UserOrdersImage.setVisibility(View.GONE);
         MainActivity.UserLogoutImage.setVisibility(View.GONE);
     }
 }

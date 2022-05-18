@@ -150,7 +150,10 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
 
-                                    MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
+                                    if(type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("driver")){
+                                        MainActivity.UserOrdersImage.setVisibility(View.VISIBLE);
+                                    }
+
                                     MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
                                     //Move To Panel
@@ -240,7 +243,6 @@ public class UserPanelLoginFragment extends Fragment {
                                     UserLogin.UpdateAccount(username, password);
                                     UserLikes.UpdateLikes(root.getContext());
 
-                                    MainActivity.UserLikesImage.setVisibility(View.VISIBLE);
                                     MainActivity.UserLogoutImage.setVisibility(View.VISIBLE);
 
                                     //Move To Panel

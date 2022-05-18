@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fashion.fashionmobile.helpers.UserLogin;
+import com.fashion.fashionmobile.ui.OrdersActivity;
 import com.fashion.fashionmobile.ui.home.HomeFragment;
 import com.fashion.fashionmobile.ui.userpanel.UserPanelFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static NavController navController = null;
 
-    public static ImageView UserLikesImage = null, UserLogoutImage = null;
+    public static ImageView UserOrdersImage = null, UserLogoutImage = null;
 
     public static ArrayList<String> CurrencyList = new ArrayList<String>(){
         {
@@ -94,17 +95,17 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.profileCard.setVisibility(View.INVISIBLE);
 
-        UserLikesImage = binding.appBarMain.mainToolbarLikes;
+        UserOrdersImage = binding.appBarMain.mainToolbarOrder;
         UserLogoutImage = binding.appBarMain.mainToolbarLogout;
 
-        UserLikesImage.setVisibility(View.GONE);
+        UserOrdersImage.setVisibility(View.GONE);
         UserLogoutImage.setVisibility(View.GONE);
 
-        UserLikesImage.setOnClickListener(new View.OnClickListener() {
+        UserOrdersImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This is going to be the user likes", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(MainActivity.this, OrdersActivity.class);
+                startActivity(i);
             }
         });
 
