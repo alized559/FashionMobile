@@ -109,8 +109,17 @@ public class ServerUrls {
         return WebsiteUrl + "placeOrder.php?userID=" + UserLogin.CurrentLoginID;
     }
 
+<<<<<<< Updated upstream
     public static String getOrderSummary(int orderID) {
         return WebsiteUrl + "getOrderSummary.php?userID=" + UserLogin.CurrentLoginID + "&orderID=" +
                 orderID;
     }
+=======
+    public static String getAllOrders = WebsiteUrl + "getOrders.php";
+
+    public static String editOrderState(int id, String state){
+        return WebsiteUrl + "editOrderState.php?userID=" + UserLogin.CurrentLoginID + "&id=" + id + "&state=" + state;
+    }
+
+>>>>>>> Stashed changes
 }

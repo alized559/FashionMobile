@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/order_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -40,7 +41,6 @@
                     android:layout_marginTop="5dp"
                     android:background="@color/vertical_line"/>
                 <TextView
-                    android:id="@+id/order_details_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
@@ -51,10 +51,11 @@
                     android:gravity="center"/>
 
                 <View
-                    android:id="@+id/order_details_vertical_line"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
+                    android:layout_gravity="center"
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@color/vertical_line"/>
 
                 <LinearLayout
@@ -191,7 +192,7 @@
                         android:id="@+id/order_state_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_bold"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:text="Order State here" />
@@ -201,7 +202,26 @@
                 <View
                     android:layout_width="250dp"
                     android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/vertical_line"/>
+
+                <TextView
+                    android:id="@+id/order_products_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Order product details" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="15dp"
                     android:layout_gravity="center"
                     android:background="@color/vertical_line"/>
 
@@ -209,42 +229,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_order_payment_image"/>
+
+                        <TextView
+                            android:id="@+id/order_payment_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:text="Cash On Delivery" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/order_price_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_bold"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:text="$ 000" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_order_payment_image"/>
-
-                    <TextView
-                        android:id="@+id/order_payment_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:text="Cash On Delivery" />
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18dp"
+                        android:text="$ 000"
+                        android:gravity="right"/>
 
                 </LinearLayout>
 

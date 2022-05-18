@@ -32,7 +32,16 @@
             android:exported="true" />
         <activity
             android:name=".ViewProductActivity"
-            android:exported="false" />
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="195.62.33.125" android:scheme="http" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true"

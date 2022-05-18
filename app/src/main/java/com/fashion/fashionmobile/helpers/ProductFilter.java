@@ -6,7 +6,6 @@ public class ProductFilter {
 
     public static HashMap<String, String> productFilterHasMap = new HashMap<String, String>();
 
-
     public static void ResetFilters(){
         productFilterHasMap.put("gender", "none");
         productFilterHasMap.put("category", "none");

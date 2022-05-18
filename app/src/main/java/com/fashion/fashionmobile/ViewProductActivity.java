@@ -121,7 +121,12 @@ public class ViewProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_product);
 
-        product_id = getIntent().getIntExtra("product_id", 0);
+        if(getIntent().getAction() != null){
+            String link = getIntent().getDataString();
+            product_id = Integer.parseInt(link.split("id=")[1]);
+        }else {
+            product_id = getIntent().getIntExtra("product_id", 0);
+        }
 
         productImage = findViewById(R.id.product_main_picture);
         productMainImage = findViewById(R.id.product_item_main_picture);
