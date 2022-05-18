@@ -120,7 +120,8 @@
                             android:id="@+id/mobile_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="3 908070"/>
+                            android:hint="3 908070"
+                            android:inputType="number"/>
 
                     </LinearLayout>
 

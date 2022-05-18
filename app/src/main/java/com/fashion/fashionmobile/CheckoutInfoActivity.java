@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class CheckoutInfoActivity extends AppCompatActivity {
         email.setText(UserLogin.CurrentLoginEmail);
         addressText.setText(address);
         country.setText(countryAddress);
-        number.setText(countryCode.substring(0, 7) + mobileNumber);
+        number.setText("(+" + countryCode + ") " + mobileNumber);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +80,15 @@ public class CheckoutInfoActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, ServerUrls.placeOrder(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                if (response.contains("wrong")) {
+                    Toast.makeText(CheckoutInfoActivity.this, response, Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("Error", error.getMessage() + " ");
+                Toast.makeText(CheckoutInfoActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable

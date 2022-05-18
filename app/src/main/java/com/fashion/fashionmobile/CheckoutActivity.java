@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -72,7 +73,8 @@ public class CheckoutActivity extends AppCompatActivity {
                     i.putExtra("fullname", fullName.getText().toString());
                     i.putExtra("address1", address1.getText().toString());
                     i.putExtra("address2", addressSpinner.getSelectedItem().toString());
-                    i.putExtra("countryCode", countrySpinner.getSelectedItem().toString());
+                    String[] array = countrySpinner.getSelectedItem().toString().split(" ");
+                    i.putExtra("countryCode", array[0].substring(2, array[0].length() - 1));
                     i.putExtra("mobileNumber", mobileNumber.getText().toString());
                     startActivity(i);
                     ((Activity) CheckoutActivity.this).overridePendingTransition(0, 0);
