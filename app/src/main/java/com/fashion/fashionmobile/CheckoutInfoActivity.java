@@ -31,6 +31,7 @@ public class CheckoutInfoActivity extends AppCompatActivity {
     private TextView name, email, addressText, country, number;
     private Button back, submit;
     private RequestQueue queue;
+    private int orderID = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,9 @@ public class CheckoutInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 placeOrder();
+                Intent i = new Intent(CheckoutInfoActivity.this, ViewPlacedOrderActivity.class);
+                i.putExtra("orderID", orderID);
+                startActivity(i);
             }
         });
     }
@@ -82,6 +86,8 @@ public class CheckoutInfoActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.contains("wrong")) {
                     Toast.makeText(CheckoutInfoActivity.this, response, Toast.LENGTH_SHORT).show();
+                } else {
+                    orderID = Integer.parseInt(response.trim());
                 }
             }
         }, new Response.ErrorListener() {

@@ -108,4 +108,9 @@ public class ServerUrls {
     public static String placeOrder() {
         return WebsiteUrl + "placeOrder.php?userID=" + UserLogin.CurrentLoginID;
     }
+
+    public static String getOrderSummary(int orderID) {
+        return WebsiteUrl + "getOrderSummary.php?userID=" + UserLogin.CurrentLoginID + "&orderID=" +
+                orderID;
+    }
 }
