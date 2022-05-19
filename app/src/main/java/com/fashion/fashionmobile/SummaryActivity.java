@@ -41,6 +41,7 @@ public class SummaryActivity extends AppCompatActivity {
     private static TextView subTotal;
     private double subtotal = 0;
     private Button backBtn, nextBtn;
+    public static int totalQuantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,8 @@ public class SummaryActivity extends AppCompatActivity {
                         double discount = row.getDouble("discount");
                         String prodItemName = row.getString("product_item_name");
                         String extra = row.getString("data");
+
+                        totalQuantity += quantity;
 
                         FlexboxLayout flex = new FlexboxLayout(SummaryActivity.this);
                         FlexboxLayout.LayoutParams flexLayout = new FlexboxLayout.LayoutParams(

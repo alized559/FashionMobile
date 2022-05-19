@@ -1,9 +1,15 @@
 package com.fashion.fashionmobile;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +41,6 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         orderID = i.getIntExtra("orderID", 0);
-        Toast.makeText(ViewPlacedOrderActivity.this, "" + orderID, Toast.LENGTH_SHORT).show();
 
         queue = Volley.newRequestQueue(this);
 
@@ -72,25 +77,36 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
                     String fullname = row.getString("fullname");
                     String deliver_to = row.getString("address");
                     int phone_number = row.getInt("number");
+                    int countryCode = row.getInt("countryCode");
                     String date = row.getString("date");
                     String state = row.getString("state");
-                    String cartItems = row.getString("cart_items");
+                    String cartItems = row.getString("cart_items").replaceAll("<qm>", "\"")
+                            .replaceAll("<ilb>", "<br>")
+                            .replaceAll("viewProduct.php", "http://195.62.33.125/viewProduct.php");
                     String payment = row.getString("payment");
 
                     orderNum.setText("Order №" + orderID + " Summary");
                     userId.setText("User ID: " + String.valueOf(user_id));
                     fullName.setText("Fullname: " + fullname);
                     deliverTo.setText("Deliver To: " + deliver_to);
-                    phoneNumber.setText("Phone Number: " + String.valueOf(phone_number));
+                    phoneNumber.setText("Phone Number: (+" + String.valueOf(countryCode + ") " + phone_number));
                     orderDate.setText("Order Date: " + date);
-                    deliveryState.setText("Delivery State: " + state);
+                    String s = "<font color='#FFD814'>" + state + "</font>";
+                    deliveryState.setText(Html.fromHtml("Delivery State: " + s));
                     assignedDriver.setText("Assigned Driver: Not Yet Assigned");
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        itemsSummary.setText(Html.fromHtml(cartItems, Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        itemsSummary.setText(Html.fromHtml(cartItems));
+                    }
+                    itemsSummary.setClickable(true);
+                    itemsSummary.setMovementMethod(LinkMovementMethod.getInstance());
+                    totalItemsText.setText(String.valueOf(SummaryActivity.totalQuantity) + " Items");
                     totalPriceText.setText(payment);
 
-                    // total items and item name remaining
-
                 } catch (Exception e) {
-
+                    Log.d("OrderError", e.getMessage() + "");
                 }
             }
         }, new Response.ErrorListener() {
@@ -101,4 +117,9 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
         });
         queue.add(request);
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 }
