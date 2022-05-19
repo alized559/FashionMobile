@@ -259,6 +259,7 @@ public class CartFragment extends Fragment {
             model.Subtitle = product_item_name;
             model.Extra = extra;
 
+
             double totalPrice = product_price * cart_item_quantity;
             model.CurrentPrice = totalPrice;
 

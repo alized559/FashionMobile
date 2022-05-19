@@ -29,8 +29,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.fashion.fashionmobile.CheckoutInfoActivity;
 import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
+import com.fashion.fashionmobile.ViewPlacedOrderActivity;
 import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.adapters.ReviewFlexBoxAdapter;
 import com.fashion.fashionmobile.adapters.ReviewDataModel;
@@ -376,6 +378,13 @@ public class UserPanelFragment extends Fragment {
                         layout.addView(textView);
 
                         card.addView(layout);
+
+                        card.setOnClickListener(v -> {
+                            Intent intent = new Intent(root.getContext(), ViewPlacedOrderActivity.class);
+                            intent.putExtra("orderID", order_id);
+                            startActivity(intent);
+                        });
+
                         ordersFlex.addView(card);
                     }
                 } catch(Exception e) {

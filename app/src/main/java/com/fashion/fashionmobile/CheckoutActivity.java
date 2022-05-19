@@ -38,7 +38,7 @@ public class CheckoutActivity extends AppCompatActivity {
         error.setVisibility(View.GONE);
 
         String[] countries = {
-                "United States", "Lebanon"
+                "Lebanon", "United States"
         };
         String[] countriesCode = {
                 "(+961) Lebanon", "(+1) United States"

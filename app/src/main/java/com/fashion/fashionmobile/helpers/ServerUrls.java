@@ -93,12 +93,6 @@ public class ServerUrls {
         return current;
     }
 
-    public static String getAllProducts() {
-        return WebsiteUrl + "getProducts.php?currency=" + UserLogin.CurrentCurrency;
-    }
-
-    public static String getProductsFilter = WebsiteUrl + "getProductsFilter.php";
-
     public static String getSummary() {
         return WebsiteUrl + "getSummary.php?userID=" + UserLogin.CurrentLoginID + "&currency=" + UserLogin.CurrentCurrency;
     }
@@ -106,20 +100,17 @@ public class ServerUrls {
     public static String getAllBrands = WebsiteUrl + "getAllBrands.php";
 
     public static String placeOrder() {
-        return WebsiteUrl + "placeOrder.php?userID=" + UserLogin.CurrentLoginID;
+        return WebsiteUrl + "placeOrder.php";
     }
 
-<<<<<<< Updated upstream
     public static String getOrderSummary(int orderID) {
         return WebsiteUrl + "getOrderSummary.php?userID=" + UserLogin.CurrentLoginID + "&orderID=" +
                 orderID;
     }
-=======
     public static String getAllOrders = WebsiteUrl + "getOrders.php";
 
     public static String editOrderState(int id, String state){
         return WebsiteUrl + "editOrderState.php?userID=" + UserLogin.CurrentLoginID + "&id=" + id + "&state=" + state;
     }
 
->>>>>>> Stashed changes
 }

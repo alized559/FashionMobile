@@ -63,7 +63,7 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
     }
 
     public void getOrderSummary() {
-        JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getOrderSummary(11), new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getOrderSummary(orderID), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {

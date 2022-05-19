@@ -25,6 +25,9 @@
             android:name=".CheckoutInfoActivity"
             android:exported="false" />
         <activity
+            android:name=".ViewPlacedOrderActivity"
+            android:exported="true" />
+        <activity
             android:name=".SummaryActivity"
             android:exported="true" />
         <activity

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,9 +22,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.helpers.ServerUrls;
 import com.fashion.fashionmobile.helpers.UserLogin;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class CheckoutInfoActivity extends AppCompatActivity {
 
@@ -72,35 +75,41 @@ public class CheckoutInfoActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                placeOrder();
-                Intent i = new Intent(CheckoutInfoActivity.this, ViewPlacedOrderActivity.class);
-                i.putExtra("orderID", orderID);
-                startActivity(i);
+                placeOrder(view);
+
             }
         });
     }
 
-    public void placeOrder() {
+    public void placeOrder(View view) {
         StringRequest request = new StringRequest(Request.Method.POST, ServerUrls.placeOrder(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.contains("wrong")) {
-                    Toast.makeText(CheckoutInfoActivity.this, response, Toast.LENGTH_SHORT).show();
-                } else {
+                Log.d("PlaceOrderError", response);
+                if (!response.contains("Error")) {
                     orderID = Integer.parseInt(response.trim());
+                    Intent i = new Intent(CheckoutInfoActivity.this, ViewPlacedOrderActivity.class);
+                    i.putExtra("orderID", orderID);
+                    startActivity(i);
+                }else {
+                    Log.d("PlaceOrderError", response + " ");
+                    Snackbar.make(view, "Failed Placing Order!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Error", error.getMessage() + " ");
-                Toast.makeText(CheckoutInfoActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Log.d("PlaceOrderError", error.getMessage() + "");
+                Snackbar.make(view, "Failed Placing Order!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<>();
+                params.put("userID", UserLogin.CurrentLoginID + "");
                 params.put("fullname", fullName);
                 params.put("address", address);
                 params.put("country", countryAddress);
@@ -110,6 +119,10 @@ public class CheckoutInfoActivity extends AppCompatActivity {
                 return params;
             }
         };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(1000), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
 }
