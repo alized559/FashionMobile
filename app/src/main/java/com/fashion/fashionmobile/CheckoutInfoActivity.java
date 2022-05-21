@@ -91,6 +91,7 @@ public class CheckoutInfoActivity extends AppCompatActivity {
                     Intent i = new Intent(CheckoutInfoActivity.this, ViewPlacedOrderActivity.class);
                     i.putExtra("orderID", orderID);
                     startActivity(i);
+                    finish();
                 }else {
                     Log.d("PlaceOrderError", response + " ");
                     Snackbar.make(view, "Failed Placing Order!", Snackbar.LENGTH_LONG)

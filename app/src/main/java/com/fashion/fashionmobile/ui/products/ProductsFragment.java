@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.fashion.fashionmobile.MainActivity;
 import com.fashion.fashionmobile.R;
 import com.fashion.fashionmobile.ViewProductActivity;
 import com.fashion.fashionmobile.databinding.FragmentProductsBinding;
@@ -170,6 +171,7 @@ public class ProductsFragment extends Fragment {
             CardView card = new CardView(root.getContext());
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.
                     LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(5, 0, 5, 0);
             card.setLayoutParams(lp);
             card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
 
@@ -296,5 +298,4 @@ public class ProductsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

@@ -124,7 +124,7 @@ public class UserPanelLoginFragment extends Fragment {
             String username = usernameText.getText().toString();
             String password = passwordText.getText().toString();
             if (isLoggingIn) {
-                if (username.length() < 4 || password.length() < 6) {
+                if (username.length() < 6 || password.length() < 6) {
                     Toast.makeText(root.getContext(), "Input Fields Invalid Length (MIN 6)", Toast.LENGTH_LONG).show();
                 } else {
                     errorMessage.clearAnimation();
@@ -214,7 +214,7 @@ public class UserPanelLoginFragment extends Fragment {
                 String email = emailText.getText().toString();
                 String fullname = fullnameText.getText().toString();
                 String repeatPassword = repeatPasswordText.getText().toString();
-                if(username.length() < 4 || password.length() < 6 || email.length() < 6 || fullname.length() < 6 || repeatPassword.length() < 6){
+                if(username.length() < 6 || password.length() < 6 || email.length() < 6 || fullname.length() < 6 || repeatPassword.length() < 6){
                     Toast.makeText(root.getContext(), "Input Fields Invalid Length (MIN 6)", Toast.LENGTH_LONG).show();
                 }else {
                     if(!password.equals(repeatPassword)){

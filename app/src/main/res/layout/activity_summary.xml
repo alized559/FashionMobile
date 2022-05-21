@@ -69,7 +69,7 @@
                     android:id="@+id/subtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$84"
+                    android:text="$000"
                     android:textSize="20dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_bold"/>

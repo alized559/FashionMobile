@@ -2,6 +2,7 @@ package com.fashion.fashionmobile;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -62,7 +63,7 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
         backToPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // go to panel
+                finish();
             }
         });
     }
@@ -102,7 +103,7 @@ public class ViewPlacedOrderActivity extends AppCompatActivity {
                     }
                     itemsSummary.setClickable(true);
                     itemsSummary.setMovementMethod(LinkMovementMethod.getInstance());
-                    totalItemsText.setText(String.valueOf(SummaryActivity.totalQuantity) + " Items");
+                    totalItemsText.setText(String.valueOf(cartItems.split("<br>").length) + " Items");
                     totalPriceText.setText(payment);
 
                 } catch (Exception e) {

@@ -371,6 +371,7 @@ public class ViewProductActivity extends AppCompatActivity {
 
         if(!UserLogin.isLoggedIn){
             addToCartButton.setVisibility(View.GONE);
+            reviewAddCardView.setVisibility(View.GONE);
         }
 
         addToCartButton.setOnClickListener(v -> {
@@ -723,6 +724,7 @@ public class ViewProductActivity extends AppCompatActivity {
                         JSONObject row = response.getJSONObject(i);
                         int rev_id = row.getInt("rev_id");
                         int user_id = row.getInt("user_id");
+                        String username = row.getString("username");
                         int product_id = row.getInt("product_id");
                         String text = row.getString("text");
                         double rate = row.getDouble("rate");
@@ -736,7 +738,7 @@ public class ViewProductActivity extends AppCompatActivity {
                         model.ReviewID = rev_id;
                         model.UserID = user_id;
                         model.ProductID = product_id;
-                        model.Title = UserLogin.CurrentLoginUsername;
+                        model.Title = username;
                         model.Subtitle = text;
                         model.Ratings = rate;
                         model.onDeleteClicked = new View.OnClickListener() {
@@ -798,6 +800,9 @@ public class ViewProductActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Bitmap response) {
                                     ImageCache.SetProfileImage(user_id, response);
+                                    if(ratingsTextView != null) {
+                                        ratingsTextView.setText((totalRatings / TotalRaters) + "");
+                                    }
                                     model.Picture = response;
                                     reviewsList.add(model);
                                     reviewsAdapter.notifyDataSetChanged();
@@ -826,6 +831,7 @@ public class ViewProductActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("ProductReviewsError", error.getMessage() + "");
+                requestProductReviews();
             }
         });
         queue.add(request);

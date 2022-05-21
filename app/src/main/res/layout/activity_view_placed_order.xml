@@ -173,7 +173,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Back To Panel"
+                        android:text="I'm Done, Thanks"
                         android:textColor="@color/white"
                         android:textSize="16dp"
                         android:fontFamily="@font/inter_bold"

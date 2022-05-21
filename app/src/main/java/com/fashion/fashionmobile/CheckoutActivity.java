@@ -78,6 +78,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     i.putExtra("mobileNumber", mobileNumber.getText().toString());
                     startActivity(i);
                     ((Activity) CheckoutActivity.this).overridePendingTransition(0, 0);
+                    finish();
                 }
             }
         });

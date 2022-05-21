@@ -45,7 +45,7 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView picture, delete;
         TextView title, subtitle;
-        RatingBar rating;
+        TextView rating;
         CardView cardView;
 
         public ViewHolder(View itemView) {
@@ -54,7 +54,7 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
             picture = itemView.findViewById(R.id.review_picture);
             title = itemView.findViewById(R.id.review_title);
             subtitle = itemView.findViewById(R.id.review_subtitle);
-            rating = itemView.findViewById(R.id.review_rating);
+            rating = itemView.findViewById(R.id.review_ratings);
             delete = itemView.findViewById(R.id.review_delete);
         }
 
@@ -62,7 +62,7 @@ public class ReviewFlexBoxAdapter extends RecyclerView.Adapter<ReviewFlexBoxAdap
             picture.setImageBitmap(model.Picture);
             title.setText(model.Title);
             subtitle.setText(model.Subtitle);
-            rating.setRating((float) model.Ratings);
+            rating.setText("Rated: " + model.Ratings + " Stars");
             if(model.CanDelete){
                 delete.setVisibility(View.VISIBLE);
                 delete.setOnClickListener(model.onDeleteClicked);

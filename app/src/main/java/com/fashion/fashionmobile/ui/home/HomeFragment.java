@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.fashion.fashionmobile.ViewProductActivity;
@@ -74,7 +75,7 @@ public class HomeFragment extends Fragment {
 
         Button shopNow = root.findViewById(R.id.shop_now);
         shopNow.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_home_to_products);
+            Navigation.findNavController(view).navigate(R.id.nav_products);
         });
 
         queue = Volley.newRequestQueue(root.getContext());
@@ -133,6 +134,7 @@ public class HomeFragment extends Fragment {
                                     CardView card = new CardView(root.getContext());
                                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.
                                             LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    lp.setMargins(5, 0, 5, 0);
                                     card.setLayoutParams(lp);
                                     card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
 
@@ -258,6 +260,7 @@ public class HomeFragment extends Fragment {
                             CardView card = new CardView(root.getContext());
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.
                                     LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            lp.setMargins(5, 0, 5, 0);
                             card.setLayoutParams(lp);
                             card.setRadius((int) (10 * root.getContext().getResources().getDisplayMetrics().density + 0.5f));
 

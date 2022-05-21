@@ -22,6 +22,9 @@
         android:id="@+id/nav_products"
         android:name="com.fashion.fashionmobile.ui.products.ProductsFragment"
         tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_nav_products_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment

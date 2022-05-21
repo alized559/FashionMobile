@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UserLogin.AttemptAutoLogin(this);
+
 
         CurrentContext = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         profileCard = header.findViewById(R.id.user_profile_picture_navbar_card);
 
         MainActivity.profileCard.setVisibility(View.INVISIBLE);
+
+        UserLogin.AttemptAutoLogin(this);
 
         UserOrdersImage = binding.appBarMain.mainToolbarOrder;
         UserLogoutImage = binding.appBarMain.mainToolbarLogout;

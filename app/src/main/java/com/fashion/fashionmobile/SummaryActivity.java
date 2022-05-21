@@ -67,6 +67,7 @@ public class SummaryActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent i = new Intent(SummaryActivity.this, CheckoutActivity.class);
                 startActivity(i);
                 ((Activity) SummaryActivity.this).overridePendingTransition(0, 0);
@@ -145,7 +146,7 @@ public class SummaryActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                getSummary();
             }
         });
         queue.add(request);
