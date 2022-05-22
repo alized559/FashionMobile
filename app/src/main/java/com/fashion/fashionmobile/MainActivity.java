@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.fashion.fashionmobile.helpers.UserLogin;
 import com.fashion.fashionmobile.ui.OrdersActivity;
 import com.fashion.fashionmobile.ui.home.HomeFragment;
@@ -63,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public static RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        requestQueue = Volley.newRequestQueue(this);
 
         CurrentContext = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());

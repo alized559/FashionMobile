@@ -30,6 +30,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -116,6 +118,9 @@ public class ViewProductActivity extends AppCompatActivity {
     Spinner extraSpinner;
     TextView extraTextView;
 
+    ScrollView viewProductSrollView;
+    RelativeLayout loadingLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +132,12 @@ public class ViewProductActivity extends AppCompatActivity {
         }else {
             product_id = getIntent().getIntExtra("product_id", 0);
         }
+
+        viewProductSrollView = findViewById(R.id.view_products_scrollview);
+        loadingLayout = findViewById(R.id.loading);
+
+        viewProductSrollView.setVisibility(View.INVISIBLE);
+        loadingLayout.setVisibility(View.VISIBLE);
 
         productImage = findViewById(R.id.product_main_picture);
         productMainImage = findViewById(R.id.product_item_main_picture);
@@ -515,7 +526,11 @@ public class ViewProductActivity extends AppCompatActivity {
                     String[] detailLines = details.split("\n");
                     for(String line : detailLines){
                         String[] data = line.split("<>");
-                        addDetailsToTable(data[0], data[1]);
+                        if(data.length > 1) {
+                            addDetailsToTable(data[0], data[1]);
+                        }else {
+                            addDetailsToTable(data[0], "");
+                        }
                     }
                     String departmentName = "Uni Sex";
                     if(department == "m"){
@@ -532,7 +547,8 @@ public class ViewProductActivity extends AppCompatActivity {
                     productDescription.setText(description);
 
                 } catch(Exception e) {
-                    Log.d("UIError", e.getMessage() + "");
+                    e.printStackTrace();
+                    Log.d("UIError1", e.getMessage() + "");
                     //.makeText(root.getContext(), "UI Error Occurred!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -546,12 +562,15 @@ public class ViewProductActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-     public void requestProductItems(){
+    int totalProductItems = 0, currentProductItems = 0;
+
+    public void requestProductItems(){
         JsonArrayRequest request = new JsonArrayRequest(ServerUrls.getProductItems(product_id), new Response.Listener<JSONArray>() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    totalProductItems = response.length();
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject row = response.getJSONObject(i);
                         requestSingleItemData(row, i == 0 ? true : false);
@@ -597,7 +616,7 @@ public class ViewProductActivity extends AppCompatActivity {
                 addProductItem(row, isFirstItem);
             }
         }catch(Exception e) {
-            Log.d("UIError", e.getMessage() + "");
+            Log.d("UIError2", e.getMessage() + "");
         }
     }
 
@@ -700,7 +719,13 @@ public class ViewProductActivity extends AppCompatActivity {
             });
             productItemsFlex.addView(card);
         }catch (Exception ex){
-            Log.d("UIError", ex.getMessage() + "");
+            ex.printStackTrace();
+            Log.d("UIError3", ex.getMessage() + "");
+        }
+        currentProductItems++;
+        if(currentProductItems == totalProductItems){
+            viewProductSrollView.setVisibility(View.VISIBLE);
+            loadingLayout.setVisibility(View.GONE);
         }
     }
 
@@ -824,7 +849,7 @@ public class ViewProductActivity extends AppCompatActivity {
                         }
                     }
                 } catch(Exception e) {
-                    Log.d("UIError", e.getMessage() + "");
+                    Log.d("UIError4", e.getMessage() + "");
                 }
             }
         }, new Response.ErrorListener() {
